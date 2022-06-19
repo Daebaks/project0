@@ -19,7 +19,13 @@ public class Customer {
 	private int customerId;
 	private List<Account> acs = new ArrayList<Account>();
 	
+    
 	
+	public Customer() {
+ 		this.firstName = firstName;
+		this.lastname = lastname;
+	}
+
 	public Customer(String firstName, String lastname, String phone, String email, String username, String password, List<Account> acs) {
 		super();
 		this.firstName = firstName;

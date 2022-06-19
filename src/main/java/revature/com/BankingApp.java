@@ -54,8 +54,22 @@ public class BankingApp {
 			
 			Customer cust = new Customer(first, last, phoneN, emailA, userN, pass, accounts);
 			
-			System.out.println("Here is your info:: "+cust.toString());
-			
+			// From here, these accounts will go under approval process.
+			// Then, customer can do transactions
+			boolean loggedIn = true;
+			while(loggedIn) {
+				
+				System.out.println("Dear: "+ cust.getFirstName() +" "+cust.getLastname()+"\n"
+						+ "Press 1 to withdraw from your Account(s)"+"\n"
+						+ "Press 2 to deposit to your Account(s)"+"\n"
+						+ "Press 3 to transfer between your Accounts"+"\n"
+						+ "Press q to quit!");
+				
+				
+				
+				
+				
+			}
 			 
 			
 			
