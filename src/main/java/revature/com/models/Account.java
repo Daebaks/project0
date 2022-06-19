@@ -2,7 +2,7 @@ package revature.com.models;
 
 public class Account {
 
-	public static int GLOBAL_ACOUNT_NUMBER = 12345;
+	public static int GLOBAL_ACOUNT_NUMBER = 1;
 	private int accountNumber;
 	private double balance;
 	
