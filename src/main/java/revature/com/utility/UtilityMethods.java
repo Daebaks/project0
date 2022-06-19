@@ -9,13 +9,16 @@ public class UtilityMethods {
 
 	// Deposit into a bank account
 	public static void deposit(int accountNum , double amount ) throws InvalidAmountOfMoneyException {
+		
+		
 		if(amount<=0) {
 			throw new InvalidAmountOfMoneyException("Please enter an amount greater than 0.00$");
-		}
-		Customer c = new Customer();
-		for(Account a: c.getAcs()) {
-			if(a.getAccountNumber()==accountNum) {
-				a.setBalance(a.getBalance()+amount);
+		} else {
+			Customer c = new Customer();
+			for(Account a: c.getAcs()) {
+				if(a.getAccountNumber()==accountNum) {
+					a.setBalance(a.getBalance()+amount);
+				}
 			}
 		}
 	}
@@ -23,17 +26,44 @@ public class UtilityMethods {
 	// Withdraw from a bank account
 	public static void withdraw(int accountNum , double amount ) 
 		throws InvalidAmountOfMoneyException,	InsufficientBalanceException {
+		
+		
 		if(amount<=0) {
 			throw new InvalidAmountOfMoneyException("Please enter an amount greater than 0.00$");
+		} else {
+			Customer c = new Customer();
+			for(Account a: c.getAcs()) {
+				if(a.getAccountNumber()==accountNum) {
+					if(a.getBalance()<amount) {
+						throw new InsufficientBalanceException("Sorry, you don't have enough fund in your account!");
+					}else {
+					a.setBalance(a.getBalance()-amount);
+					}
+				}
+			}
 		}
+	}
+	
+	// Transfer between two accounts
+	public static void transfer(int accountNumFrom , int accountNumTo,  double amount)
+			throws InvalidAmountOfMoneyException,	InsufficientBalanceException {
 		
-		Customer c = new Customer();
-		for(Account a: c.getAcs()) {
-			if(a.getAccountNumber()==accountNum) {
-				if(a.getBalance()<amount) {
-					throw new InsufficientBalanceException("Sorry, you don't have enough fund in your account!");
-				}else {
-				a.setBalance(a.getBalance()-amount);
+		if(amount<=0) {
+			throw new InvalidAmountOfMoneyException("Please enter an amount greater than 0.00$");
+		}else {
+			Customer c = new Customer();
+			for(Account a: c.getAcs()) {
+				if(a.getAccountNumber()==accountNumFrom) {
+					if(a.getBalance()<amount) {
+						throw new InsufficientBalanceException("Sorry, you don't have enough fund in your account!");
+					}else {
+						a.setBalance(a.getBalance()-amount);
+						for(Account a1: c.getAcs()) {
+							if(a1.getAccountNumber()==accountNumTo) {
+								a1.setBalance(a1.getBalance()+amount);
+							}
+						}
+					}
 				}
 			}
 		}
