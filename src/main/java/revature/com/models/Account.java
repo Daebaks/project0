@@ -1,15 +1,25 @@
 package revature.com.models;
 
+import java.math.BigInteger;
+import java.util.Random;
+
 public class Account {
 
 	public static int GLOBAL_ACOUNT_NUMBER = 1;
 	private int accountNumber;
-	private double balance;
+	private double balance=0;
+	
+	public Account() {
+		this.accountNumber = accountNumber;
+		this.balance = balance;
+		setAccountNumber();
+	}
 	
 	public Account(int accountNumber, double balance) {
 		super();
 		this.accountNumber = accountNumber;
 		this.balance = balance;
+		setAccountNumber();
 	}
 
 	public int getAccountNumber() {
@@ -17,7 +27,9 @@ public class Account {
 	}
 
 	public void setAccountNumber() {
-		GLOBAL_ACOUNT_NUMBER+=((int) Math.random()*99886698);
+		BigInteger b = new BigInteger(256, new Random());
+		int GLOBAL_ACOUNT_NUMBER = 1;
+		GLOBAL_ACOUNT_NUMBER+=Math.abs(b.intValue()+((int) (10*Math.random())));		
 		this.accountNumber = GLOBAL_ACOUNT_NUMBER;
 	}
 

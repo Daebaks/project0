@@ -29,6 +29,7 @@ public class Customer {
 		this.username = username;
 		this.password = password;
 		this.acs = acs;
+		setCustomerId();
 	}
 	
 	private void setCustomerId() {
@@ -95,6 +96,13 @@ public class Customer {
 
 	public void setAcs(List<Account> acs) {
 		this.acs = acs;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [firstName=" + firstName + ", lastname=" + lastname + ", phone=" + phone + ", email=" + email
+				+ ", username=" + username + ", password=" + password + ", customerId=" + customerId + ", acs=" + acs
+				+ "]";
 	}
 
 	 
