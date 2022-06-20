@@ -8,15 +8,18 @@ import revature.com.models.Customer;
 public class UtilityMethods {
 
 	// Deposit into a bank account
-	public static void deposit(int accountNum , double amount ) throws InvalidAmountOfMoneyException {
+	public static void deposit(Customer c,int accountNum , double amount ) throws InvalidAmountOfMoneyException {
 		
 		
 		if(amount<=0) {
 			throw new InvalidAmountOfMoneyException("Please enter an amount greater than 0.00$");
 		} else {
-			Customer c = new Customer();
+			//System.out.println("===START-DEBUGGER===");
+			 
 			for(Account a: c.getAcs()) {
+				//System.out.println("===INSIDE-FOR===");
 				if(a.getAccountNumber()==accountNum) {
+					//System.out.println("===INSIDE-IF===");
 					a.setBalance(a.getBalance()+amount);
 				}
 			}
@@ -24,14 +27,14 @@ public class UtilityMethods {
 	}
 	
 	// Withdraw from a bank account
-	public static void withdraw(int accountNum , double amount ) 
+	public static void withdraw(Customer c, int accountNum , double amount ) 
 		throws InvalidAmountOfMoneyException,	InsufficientBalanceException {
 		
 		
 		if(amount<=0) {
 			throw new InvalidAmountOfMoneyException("Please enter an amount greater than 0.00$");
 		} else {
-			Customer c = new Customer();
+			 
 			for(Account a: c.getAcs()) {
 				if(a.getAccountNumber()==accountNum) {
 					if(a.getBalance()<amount) {
@@ -45,13 +48,13 @@ public class UtilityMethods {
 	}
 	
 	// Transfer between two accounts
-	public static void transfer(int accountNumFrom , int accountNumTo,  double amount)
+	public static void transfer(Customer c, int accountNumFrom , int accountNumTo,  double amount)
 			throws InvalidAmountOfMoneyException,	InsufficientBalanceException {
 		
 		if(amount<=0) {
 			throw new InvalidAmountOfMoneyException("Please enter an amount greater than 0.00$");
 		}else {
-			Customer c = new Customer();
+			 
 			for(Account a: c.getAcs()) {
 				if(a.getAccountNumber()==accountNumFrom) {
 					if(a.getBalance()<amount) {
@@ -69,9 +72,9 @@ public class UtilityMethods {
 		}
 	}
 	
-	public static void printAccount(int accountN) {
+	public static void printAccount(Customer c,int accountN) {
 		
-		Customer c = new Customer();
+		 
 		for(Account a: c.getAcs()) {
 			if(a.getAccountNumber()==accountN) {
 				

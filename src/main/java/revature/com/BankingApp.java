@@ -1,9 +1,13 @@
 package revature.com;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+
+import revature.com.exceptions.InsufficientBalanceException;
+import revature.com.exceptions.InvalidAmountOfMoneyException;
 import revature.com.models.Account;
 import revature.com.models.Customer;
 import revature.com.utility.UtilityMethods;
@@ -73,51 +77,89 @@ public class BankingApp {
 				String key = scan.next();
 				
 				switch (key) {
-				case "1":
+				case "1":  			//Withdraw money
 					
-					System.out.println("Please enter account number you want to withdraw from!");
+					System.out.println("==========================================");
 					System.out.println("You have "+cust.getAcs().size()+" accounts");
 					int counterWithdrawal=1;
 					for(Account temp: cust.getAcs()) {
 						System.out.println("Account "+counterWithdrawal+"\n"
 								+"Account# "+temp.getAccountNumber()+"\n"
-								+"Balance $ "+temp.getBalance()
+								+"Balance $ "+temp.getBalance()+"\n"
 								+"==========================================");
 						counterWithdrawal++;
 					}
 					
+					System.out.println("Please enter account number you want to withdraw from!");
 					int acNumWithdrawal = scan.nextInt();
 					
 					System.out.println("Please enter the amount to withdraw!");
-					Double withdrawalMoneyAmount= scan.nextDouble();
-					UtilityMethods.withdraw(acNumWithdrawal, withdrawalMoneyAmount );
 					
-					System.out.println("You withdrew "+withdrawalMoneyAmount+" from your account!");
-					UtilityMethods.printAccount(acNumWithdrawal);
+					
+					boolean isValidInputWithdrawal = false;
+					while (!isValidInputWithdrawal) {
+						try {
+							Double withdrawalMoneyAmount= scan.nextDouble();
+							UtilityMethods.withdraw(cust,acNumWithdrawal, withdrawalMoneyAmount );
+							System.out.println("You withdrew "+withdrawalMoneyAmount+" from your account!");
+							UtilityMethods.printAccount(cust,acNumWithdrawal);
+							
+							// DONT FORGET
+							isValidInputWithdrawal = true;
+						} catch (InvalidAmountOfMoneyException e) {
+							System.out.println(e.getMessage());
+						}  catch (InsufficientBalanceException e) {
+							System.out.println(e.getMessage());
+						} catch (InputMismatchException e) {
+							System.out.println("Input a valid amount of money!");
+						}   finally {
+							scan.nextLine(); // This allows us to repeat if necessary
+						}
+					}
+					
 					
 					
 					break;
-				case "2":
+				case "2":  			//Deposit money
 					
-					System.out.println("Please enter account number you want to deposit to!");
+					System.out.println("==========================================");
 					System.out.println("You have "+cust.getAcs().size()+" accounts");
 					int counterDeposit=1;
 					for(Account temp: cust.getAcs()) {
 						System.out.println("Account "+counterDeposit+"\n"
 								+"Account# "+temp.getAccountNumber()+"\n"
-								+"Balance $ "+temp.getBalance()
+								+"Balance $ "+temp.getBalance()+"\n"
 								+"==========================================");
 						counterDeposit++;
 					}
 					
+					System.out.println("Please enter account number you want to deposit to!");
 					int acNumDeposit = scan.nextInt();
 					
 					System.out.println("Please enter the amount to deposit!");
-					Double depositMoneyAmount= scan.nextDouble();
-					UtilityMethods.withdraw(acNumDeposit, depositMoneyAmount );
 					
-					System.out.println("You depositted "+depositMoneyAmount+" to your account!");
-					UtilityMethods.printAccount(acNumDeposit);
+					boolean isValidInputDeposit = false;
+					while (!isValidInputDeposit) {
+						try {
+							Double depositMoneyAmount= scan.nextDouble();
+ 							
+							UtilityMethods.deposit(cust,acNumDeposit, depositMoneyAmount);
+							System.out.println("You depositted "+depositMoneyAmount+" to your account!");
+							UtilityMethods.printAccount(cust,acNumDeposit);
+							
+							// DONT FORGET
+							isValidInputDeposit = true;
+						} catch (InvalidAmountOfMoneyException e) {
+							System.out.println(e.getMessage());
+						} catch (InputMismatchException e) {
+							System.out.println("Input a valid amount of money!");
+						}  finally {
+							scan.nextLine(); // This allows us to repeat if necessary
+						}
+					}
+					
+					
+					
 					
 					break;
 				case "3":
