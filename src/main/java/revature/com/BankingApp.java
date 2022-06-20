@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import revature.com.models.Account;
 import revature.com.models.Customer;
+import revature.com.utility.UtilityMethods;
 
 public class BankingApp {
 
@@ -17,17 +18,21 @@ public class BankingApp {
 	
 	public static void main(String[] args) {
 		run();
+		
 	}
 	
 	public static void run() {
 		
+		boolean mainLoggedIn = true;
+		while(mainLoggedIn) {
+			
 		// Checking user's role. Three roles: Customer, Employee, and Administrator
-		System.out.println("Welcome. Please enter your role! [customer, employee, administrator]");
+		System.out.println("Welcome. Please enter your role! [customer, employee, administrator - or q to exit the bank!]");
 		String user = scan.next();
 		
 		if(user.equalsIgnoreCase("customer")) {
 			
-			System.out.println("Welcome to the Bank!!");
+			System.out.println("==========Welcome to the Bank!!==========");
 			System.out.println("How many accounts would you like to apply for today?");
 			
 			int numOfAccounts = scan.nextInt();
@@ -55,9 +60,9 @@ public class BankingApp {
 			Customer cust = new Customer(first, last, phoneN, emailA, userN, pass, accounts);
 			
 			// From here, these accounts will go under approval process.
-			// Then, customer can do transactions
-			boolean loggedIn = true;
-			while(loggedIn) {
+			// Then, customer can do the following after logging in 
+			boolean customerLoggedIn = true;
+			while(customerLoggedIn) {
 				
 				System.out.println("Dear: "+ cust.getFirstName() +" "+cust.getLastname()+"\n"
 						+ "Press 1 to withdraw from your Account(s)"+"\n"
@@ -65,6 +70,47 @@ public class BankingApp {
 						+ "Press 3 to transfer between your Accounts"+"\n"
 						+ "Press q to quit!");
 				
+				String key = scan.next();
+				
+				switch (key) {
+				case "1":
+					
+					System.out.println("Please enter account number you want to withdraw from!");
+					System.out.println("You have "+cust.getAcs().size()+" accounts");
+					int count=1;
+					for(Account temp: cust.getAcs()) {
+						System.out.println("Account "+count+"\n"
+								+"Account# "+temp.getAccountNumber()+"\n"
+								+"Balance $ "+temp.getBalance()
+								+"==========================================");
+						count++;
+					}
+					
+					int acNum = scan.nextInt();
+					
+					System.out.println("Please enter the amount to withdraw!");
+					Double withdrawalMoney= scan.nextDouble();
+					UtilityMethods.withdraw(acNum, withdrawalMoney );
+					
+					System.out.println("You withdrew "+withdrawalMoney+" from your account!");
+					UtilityMethods.printAccount(acNum);
+					
+					
+					break;
+				case "2":
+					
+					break;
+				case "3":
+	
+					break;
+				case "q":
+					System.out.println("======Thank you for being a valued customer!======");
+					customerLoggedIn = false;
+					break;
+				default:
+					System.out.println("invalid Input, try again!");
+					break;
+				}
 				
 				
 				
@@ -78,13 +124,13 @@ public class BankingApp {
 		}else if(user.equalsIgnoreCase("administrator")) {
 			//
 		} else {
-			System.out.println("Invalid role!");
-			System.exit(0);
+			System.out.println("======Thank you for being a valued customer!======");
+			mainLoggedIn = false;
 		}
+ }
 		
-		
-		
-		
+		scan.close();
 	}
+	
 	
 }

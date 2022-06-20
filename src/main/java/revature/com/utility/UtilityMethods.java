@@ -69,4 +69,21 @@ public class UtilityMethods {
 		}
 	}
 	
+	public static void printAccount(int accountN) {
+		
+		Customer c = new Customer();
+		for(Account a: c.getAcs()) {
+			if(a.getAccountNumber()==accountN) {
+				
+				System.out.println("============Account Details============");
+				System.out.println("Account# "+a.getAccountNumber());
+				System.out.println("Balance# "+a.getBalance());
+				System.out.println("==================================");
+				
+			}
+		}
+		
+		
+	}
+	
 }
