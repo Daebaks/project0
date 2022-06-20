@@ -77,27 +77,47 @@ public class BankingApp {
 					
 					System.out.println("Please enter account number you want to withdraw from!");
 					System.out.println("You have "+cust.getAcs().size()+" accounts");
-					int count=1;
+					int counterWithdrawal=1;
 					for(Account temp: cust.getAcs()) {
-						System.out.println("Account "+count+"\n"
+						System.out.println("Account "+counterWithdrawal+"\n"
 								+"Account# "+temp.getAccountNumber()+"\n"
 								+"Balance $ "+temp.getBalance()
 								+"==========================================");
-						count++;
+						counterWithdrawal++;
 					}
 					
-					int acNum = scan.nextInt();
+					int acNumWithdrawal = scan.nextInt();
 					
 					System.out.println("Please enter the amount to withdraw!");
-					Double withdrawalMoney= scan.nextDouble();
-					UtilityMethods.withdraw(acNum, withdrawalMoney );
+					Double withdrawalMoneyAmount= scan.nextDouble();
+					UtilityMethods.withdraw(acNumWithdrawal, withdrawalMoneyAmount );
 					
-					System.out.println("You withdrew "+withdrawalMoney+" from your account!");
-					UtilityMethods.printAccount(acNum);
+					System.out.println("You withdrew "+withdrawalMoneyAmount+" from your account!");
+					UtilityMethods.printAccount(acNumWithdrawal);
 					
 					
 					break;
 				case "2":
+					
+					System.out.println("Please enter account number you want to deposit to!");
+					System.out.println("You have "+cust.getAcs().size()+" accounts");
+					int counterDeposit=1;
+					for(Account temp: cust.getAcs()) {
+						System.out.println("Account "+counterDeposit+"\n"
+								+"Account# "+temp.getAccountNumber()+"\n"
+								+"Balance $ "+temp.getBalance()
+								+"==========================================");
+						counterDeposit++;
+					}
+					
+					int acNumDeposit = scan.nextInt();
+					
+					System.out.println("Please enter the amount to deposit!");
+					Double depositMoneyAmount= scan.nextDouble();
+					UtilityMethods.withdraw(acNumDeposit, depositMoneyAmount );
+					
+					System.out.println("You depositted "+depositMoneyAmount+" to your account!");
+					UtilityMethods.printAccount(acNumDeposit);
 					
 					break;
 				case "3":
