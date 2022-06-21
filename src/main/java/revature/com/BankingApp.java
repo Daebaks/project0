@@ -174,9 +174,15 @@ public class BankingApp {
 			//
 		}else if(user.equalsIgnoreCase("administrator")) {
 			//
-		} else {
-			System.out.println("======Thank you for being a valued customer!======");
+		} else if(user.equalsIgnoreCase("q")){
+			System.out.println("======Thank you for using the banking app!======");
 			mainLoggedIn = false;
+		} else if(user.equalsIgnoreCase("r")){
+			// Register
+		} 
+		else {
+			System.out.println("======User doesn't exist. Try again or register by pressing -r- ======");
+			scan.nextLine();
 		}
  }
 		
