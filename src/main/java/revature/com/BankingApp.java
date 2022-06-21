@@ -14,11 +14,7 @@ import revature.com.utility.UtilityMethods;
 
 public class BankingApp {
 
-	
 	private static Scanner scan = new Scanner(System.in);
-	
-	 
-	
 	
 	public static void main(String[] args) {
 		run();
@@ -29,7 +25,8 @@ public class BankingApp {
 		boolean mainLoggedIn = true;
 		while(mainLoggedIn) {
 			
-		// Checking user's role. Three roles: Customer, Employee, and Administrator
+		// Checking user's role. Three roles: Customer, Employee, and Administrator. This will be implemented
+		// depending on the type of credentials/IDs
 		System.out.println("Welcome. Please enter your role! [customer, employee, administrator - or q to exit the bank!]");
 		String user = scan.next();
 		
@@ -47,12 +44,10 @@ public class BankingApp {
 			 * */
 			//==========================================
 			
-			//New customer registration.
-			System.out.println("==========Welcome to the Bank!!==========");
 			
-			
-			//=============For new customers only==============
 			//if a customer is a current account(s) holder, customer will skip the registration part which starts underneath.
+			//==========Start new customers registration===========
+			System.out.println("==========Welcome to the Bank!!==========");
 			System.out.println("How many new accounts would you like to apply for today?");
 			int numOfAccounts = scan.nextInt();
 			
@@ -62,7 +57,6 @@ public class BankingApp {
 				Account acc = new Account();
 				accounts.add(acc);
 			}
-			
 			System.out.println("Let's fill in your personal information!");
 			System.out.println("What is your first name?");
 			String first = scan.next();
@@ -83,8 +77,8 @@ public class BankingApp {
 			
 			
 			
-			// For a successful customer log-in
-			// Customer can do the following after logging in 
+			// For a successful customer log-in/ or after registration
+			// Customer can do the following after logging-in 
 			boolean customerLoggedIn = true;
 			while(customerLoggedIn) {
 				
@@ -92,13 +86,14 @@ public class BankingApp {
 						+ "Press 1 to withdraw from your Account(s)"+"\n"
 						+ "Press 2 to deposit to your Account(s)"+"\n"
 						+ "Press 3 to transfer between your Accounts"+"\n"
-						+ "Press q to quit!");
-				if(cust.getAcs().size()!=0) {
-					UtilityMethods.printAllAccounts(cust);
-				}
+						+ "Press q to Log-out!");
+//				if(cust.getAcs().size()!=0) {
+//					UtilityMethods.printAllAccounts(cust);           
+//				}
 				String key = scan.next();
 				
 				switch (key) {
+				
 				case "1":  			//Withdraw money
 					
 					UtilityMethods.printAllAccounts(cust);
@@ -106,12 +101,10 @@ public class BankingApp {
 					System.out.println("Please enter account number you want to withdraw from!");
 					int acNumWithdrawal = scan.nextInt();
 					
-					System.out.println("Please enter the amount to withdraw!");
-					
-					
 					boolean isValidInputWithdrawal = false;
 					while (!isValidInputWithdrawal) {
 						try {
+							System.out.println("Please enter the amount to withdraw!");
 							Double withdrawalMoneyAmount= scan.nextDouble();
 							UtilityMethods.withdraw(cust,acNumWithdrawal, withdrawalMoneyAmount );
 							System.out.println("You withdrew "+withdrawalMoneyAmount+" from your account!");
@@ -139,11 +132,11 @@ public class BankingApp {
 					System.out.println("Please enter account number you want to deposit to!");
 					int acNumDeposit = scan.nextInt();
 					
-					System.out.println("Please enter the amount to deposit!");
 					
 					boolean isValidInputDeposit = false;
 					while (!isValidInputDeposit) {
 						try {
+							System.out.println("Please enter the amount to deposit!");
 							Double depositMoneyAmount= scan.nextDouble();
  							
 							UtilityMethods.deposit(cust,acNumDeposit, depositMoneyAmount);
@@ -160,9 +153,6 @@ public class BankingApp {
 						}
 					}
 					
-					
-					
-					
 					break;
 				case "3":
 					// Transfer money between accounts
@@ -175,9 +165,6 @@ public class BankingApp {
 					System.out.println("invalid Input, try again!");
 					break;
 				}
-				
-				
-				
 				
 			}
 			 

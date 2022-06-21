@@ -28,7 +28,6 @@ public class Account {
 
 	public void setAccountNumber() {
 		BigInteger b = new BigInteger(256, new Random());
-		int GLOBAL_ACOUNT_NUMBER = 1;
 		GLOBAL_ACOUNT_NUMBER+=Math.abs(b.intValue()+((int) (10*Math.random())));		
 		this.accountNumber = GLOBAL_ACOUNT_NUMBER;
 	}
