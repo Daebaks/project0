@@ -22,7 +22,6 @@ public class BankingApp {
 	
 	public static void main(String[] args) {
 		run();
-		
 	}
 	
 	public static void run() {
@@ -34,13 +33,30 @@ public class BankingApp {
 		System.out.println("Welcome. Please enter your role! [customer, employee, administrator - or q to exit the bank!]");
 		String user = scan.next();
 		
+		/*
+		 * Based on the credentials provided, user will log-in under the appropriate role. 
+		 * If no account exists, customers will have a chance to register to open new account(s)
+		 * */
+		
 		if(user.equalsIgnoreCase("customer")) {
 			
-			System.out.println("==========Welcome to the Bank!!==========");
-			System.out.println("How many accounts would you like to apply for today?");
+			//==========================================
+			/*
+			 * For current customers, users can log-in using their credentials, otherwise,
+			 * new customers will have the chance to open new account(s)
+			 * */
+			//==========================================
 			
+			//New customer registration.
+			System.out.println("==========Welcome to the Bank!!==========");
+			
+			
+			//=============For new customers only==============
+			//if a customer is a current account(s) holder, customer will skip the registration part which starts underneath.
+			System.out.println("How many new accounts would you like to apply for today?");
 			int numOfAccounts = scan.nextInt();
 			
+			//Creating new accounts. New customers
 			List<Account> accounts = new ArrayList<Account>();
 			for(int i = 0; i<numOfAccounts; i++ ) {
 				Account acc = new Account();
@@ -62,9 +78,13 @@ public class BankingApp {
 			String pass = scan.next();
 			
 			Customer cust = new Customer(first, last, phoneN, emailA, userN, pass, accounts);
-			
 			// From here, these accounts will go under approval process.
-			// Then, customer can do the following after logging in 
+			//==========End new customers registration============
+			
+			
+			
+			// For a successful customer log-in
+			// Customer can do the following after logging in 
 			boolean customerLoggedIn = true;
 			while(customerLoggedIn) {
 				
@@ -73,22 +93,15 @@ public class BankingApp {
 						+ "Press 2 to deposit to your Account(s)"+"\n"
 						+ "Press 3 to transfer between your Accounts"+"\n"
 						+ "Press q to quit!");
-				
+				if(cust.getAcs().size()!=0) {
+					UtilityMethods.printAllAccounts(cust);
+				}
 				String key = scan.next();
 				
 				switch (key) {
 				case "1":  			//Withdraw money
 					
-					System.out.println("==========================================");
-					System.out.println("You have "+cust.getAcs().size()+" accounts");
-					int counterWithdrawal=1;
-					for(Account temp: cust.getAcs()) {
-						System.out.println("Account "+counterWithdrawal+"\n"
-								+"Account# "+temp.getAccountNumber()+"\n"
-								+"Balance $ "+temp.getBalance()+"\n"
-								+"==========================================");
-						counterWithdrawal++;
-					}
+					UtilityMethods.printAllAccounts(cust);
 					
 					System.out.println("Please enter account number you want to withdraw from!");
 					int acNumWithdrawal = scan.nextInt();
@@ -104,7 +117,6 @@ public class BankingApp {
 							System.out.println("You withdrew "+withdrawalMoneyAmount+" from your account!");
 							UtilityMethods.printAccount(cust,acNumWithdrawal);
 							
-							// DONT FORGET
 							isValidInputWithdrawal = true;
 						} catch (InvalidAmountOfMoneyException e) {
 							System.out.println(e.getMessage());
@@ -113,7 +125,7 @@ public class BankingApp {
 						} catch (InputMismatchException e) {
 							System.out.println("Input a valid amount of money!");
 						}   finally {
-							scan.nextLine(); // This allows us to repeat if necessary
+							scan.nextLine(); 
 						}
 					}
 					
@@ -122,16 +134,7 @@ public class BankingApp {
 					break;
 				case "2":  			//Deposit money
 					
-					System.out.println("==========================================");
-					System.out.println("You have "+cust.getAcs().size()+" accounts");
-					int counterDeposit=1;
-					for(Account temp: cust.getAcs()) {
-						System.out.println("Account "+counterDeposit+"\n"
-								+"Account# "+temp.getAccountNumber()+"\n"
-								+"Balance $ "+temp.getBalance()+"\n"
-								+"==========================================");
-						counterDeposit++;
-					}
+					 UtilityMethods.printAllAccounts(cust);
 					
 					System.out.println("Please enter account number you want to deposit to!");
 					int acNumDeposit = scan.nextInt();
@@ -147,14 +150,13 @@ public class BankingApp {
 							System.out.println("You depositted "+depositMoneyAmount+" to your account!");
 							UtilityMethods.printAccount(cust,acNumDeposit);
 							
-							// DONT FORGET
 							isValidInputDeposit = true;
 						} catch (InvalidAmountOfMoneyException e) {
 							System.out.println(e.getMessage());
 						} catch (InputMismatchException e) {
 							System.out.println("Input a valid amount of money!");
 						}  finally {
-							scan.nextLine(); // This allows us to repeat if necessary
+							scan.nextLine();
 						}
 					}
 					
@@ -163,7 +165,7 @@ public class BankingApp {
 					
 					break;
 				case "3":
-	
+					// Transfer money between accounts
 					break;
 				case "q":
 					System.out.println("======Thank you for being a valued customer!======");

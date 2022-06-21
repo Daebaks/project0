@@ -83,4 +83,17 @@ public class UtilityMethods {
 		}
 	}
 	
+	public static void printAllAccounts(Customer c) {
+		System.out.println("==========================================");
+		System.out.println("Customer: "+c.getFirstName()+" "+c.getLastname()+" has "+c.getAcs().size()+" accounts");
+		int counter=1;
+		for(Account temp: c.getAcs()) {
+			System.out.println("Account "+counter+"\n"
+					+"Account# "+temp.getAccountNumber()+"\n"
+					+"Balance $ "+temp.getBalance()+"\n"
+					+"==========================================");
+			counter++;
+		}
+	}
+	
 }
