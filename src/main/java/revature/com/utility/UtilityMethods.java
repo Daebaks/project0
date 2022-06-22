@@ -47,7 +47,7 @@ public class UtilityMethods {
 		}
 	}
 	
-	// Transfer between two accounts
+	// Transfer between two accounts same customer
 	public static void transfer(Customer c, int accountNumFrom , int accountNumTo,  double amount)
 			throws InvalidAmountOfMoneyException,	InsufficientBalanceException {
 		

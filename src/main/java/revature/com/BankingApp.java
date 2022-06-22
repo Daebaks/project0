@@ -5,7 +5,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-
 import revature.com.exceptions.InsufficientBalanceException;
 import revature.com.exceptions.InvalidAmountOfMoneyException;
 import revature.com.models.Account;
@@ -15,9 +14,10 @@ import revature.com.utility.UtilityMethods;
 public class BankingApp {
 
 	private static Scanner scan = new Scanner(System.in);
-	private static Customer newCustomer;
-	private static String user;
-	private static boolean newRegistration;
+	private static Customer newCustomer;	//Customer handler
+	private static String user;						//Control's the role
+	private static boolean newRegistration; //Control the state of customer's log-in
+	private static  List<Customer> pendingCustomers;  //accounts of customers that are pending for review.
 	
 	public static void main(String[] args) {
 		run();
@@ -28,9 +28,6 @@ public class BankingApp {
 		boolean mainLoggedIn = true;
 		while(mainLoggedIn) {
 			
-		
-		
-		
 		/*
 		 * Based on the credentials provided, user will log-in under the appropriate role. 
 		 * If no account exists, customers will have a chance to register to open new account(s)
@@ -57,7 +54,6 @@ public class BankingApp {
 						+ "Press 3 to transfer between your Accounts"+"\n"
 						+"Press 4 to view your accounts"+"\n"
 						+ "Press q to Log-out!");
-
 				String key = scan.next();
 				
 				switch (key) {
@@ -89,17 +85,14 @@ public class BankingApp {
 							scan.nextLine(); 
 						}
 					}
-					
-					
-					
 					break;
+				
 				case "2":  			//Deposit money
 					
 					 UtilityMethods.printAllAccounts(newCustomer);
 					
 					System.out.println("Please enter account number you want to deposit to!");
 					int acNumDeposit = scan.nextInt();
-					
 					
 					boolean isValidInputDeposit = false;
 					while (!isValidInputDeposit) {
@@ -120,11 +113,13 @@ public class BankingApp {
 							scan.nextLine();
 						}
 					}
-					
 					break;
+				
 				case "3":
+					
 					// Transfer money between accounts
 					break;
+				
 				case "4":
 					
 					UtilityMethods.printAllAccounts(newCustomer);
@@ -133,6 +128,8 @@ public class BankingApp {
 				case "q":
 					System.out.println("======Thank you for being a valued customer!======");
 					customerLoggedIn = false;
+					scan.close();
+					System.exit(0);
 					break;
 				default:
 					System.out.println("invalid Input, try again!");
@@ -143,7 +140,7 @@ public class BankingApp {
 			 
 			
 			
-		} else if(user.equalsIgnoreCase("employee")) {
+		} else if(user.equalsIgnoreCase("employee")) { 
 			//
 		}else if(user.equalsIgnoreCase("administrator")) {
 			//
@@ -163,6 +160,8 @@ public class BankingApp {
 				Account acc = new Account();
 				accounts.add(acc);
 			}
+			
+			//Filling in new customer's personal information
 			System.out.println("Let's fill in your personal information!");
 			System.out.println("What is your first name?");
 			String first = scan.next();
