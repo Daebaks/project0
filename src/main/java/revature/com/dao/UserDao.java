@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
+import java.util.LinkedList;
 import java.util.List;
 
+import revature.com.models.Account;
 import revature.com.models.User;
 import revature.com.utility.ConnectionUtility;
 
@@ -17,9 +20,8 @@ public class UserDao implements UserDaoInterface {
 
 		Connection conn = ConnectionUtility.getConnection();
 
-		 String sql = "INSERT INTO users (username, pwd, user_role) VALUES (?, ?, ?) RETURNING users.id";
+		String sql = "INSERT INTO users (username, pwd, user_role) VALUES (?, ?, ?) RETURNING users.id";
 
- 
 		try {
 			PreparedStatement st = conn.prepareStatement(sql);
 
@@ -61,7 +63,38 @@ public class UserDao implements UserDaoInterface {
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
+
+//		List<User> usersList = new LinkedList<User>();
+//
+//		try (Connection conn = ConnectionUtility.getConnection()) {
+//
+//			Statement st = conn.createStatement();
+//
+//			String sql = "SELECT * FROM users INNER JOIN accounts ON users.id=accounts.users_a_id";
+//			
+//			ResultSet rs = st.executeQuery(sql);
+//			
+//			while(rs.next()) {
+//				
+//				int id = rs.getInt("id");
+//				String username = rs.getString("username");
+//				String password = rs.getString("pwd");
+//				String userRole = rs.getString("user_role");
+//				List<Account> userAccounts = rs
+//				
+//				User u = new User
+//
+//				
+//			}
+//			
+//			
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return usersList;
 		return null;
 	}
 

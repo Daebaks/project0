@@ -31,7 +31,7 @@ public class ConnectionUtility {
 		
 		try {
 			conn = DriverManager.getConnection(url, username, password);
-			System.out.println("Established connection to the DB!");
+			//System.out.println("Established connection to the DB!");
 		} catch (SQLException e) {
 			System.out.println("Connection failed!");
 			e.printStackTrace();

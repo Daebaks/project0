@@ -3,10 +3,12 @@ package revature.com;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import revature.com.exceptions.UsernameAlreadyExistsException;
 import revature.com.models.Role;
 import revature.com.models.User;
 import revature.com.service.AccountService;
 import revature.com.service.UserService;
+import revature.com.utility.UtilityMethods;
 
 public class BankingApp {
 
@@ -14,21 +16,24 @@ public class BankingApp {
 
 	public static void main(String[] args) {
 
-		run();
+		 run();
+//		AccountService as = new AccountService();
+//		as.viewAllAccounts();
 
 	}
 
 	public static void run() {
 
-		boolean running = true;   //Keeping the main loop to run the program until user quits
+		System.out.println("Welcome to the Bank");
 		
-		while(running) {
+		boolean mainRunning = true;   //Keeping the main loop to run the program until user quits
+		
+		while(mainRunning) {
 			
 			
 			try {
 				
-				System.out.println("Welcome to the Bank \n"
-						+ "Please press 1 to register if you are a new customer \n"
+				System.out.println("Please press 1 to register if you are a new customer \n"
 						+ "Please press 2 to log-in if you are a current customer \n"
 						+ "Please press 3 to exit the Bank");
 				int entry = scan.nextInt();
@@ -36,23 +41,52 @@ public class BankingApp {
 				if(entry == 2) {
 					
 					//Logging-in for an existing user
+					boolean loggedInRunning = true;
+					while(loggedInRunning) {
+						
+						
+						
+					}
+					
 					
 				}else if (entry == 1) {
 					
 					//Registration for a new customer
+					boolean registrationRunning = true;
+					while(registrationRunning) {
+						
+						try {
+							System.out.println("Enter username");
+							String username = scan.next();
+							UtilityMethods.validateUsername(username);
+							
+							System.out.println("Enter password");
+							String password = scan.next();
+							
+							User u = new User(username, password, Role.Customer, null);
+							UserService us = new UserService();
+							us.register(u);
+						} catch (UsernameAlreadyExistsException e) {
+							System.out.println(e.getMessage()); 
+						} finally {
+							scan.nextLine();
+						}
+						
+						
+					}
 					
 					
 				} else if(entry == 3) {
 					
-					running = false;   //To quit the program
-					System.out.println("Thank you for using the Bank");
+					mainRunning = false;   //To quit the program
+					System.out.println("\nThank you for using the Bank");
 				} else {
 					
-					System.out.println("invalid input. Please try again");
+					System.out.println("invalid input. Please try again \n");
 				}
 			} catch (InputMismatchException e) {
 				
-				System.out.println("invalid input. Please try again");
+				System.out.println("invalid input. Please try again \n");
 			} finally {
 				
 				scan.nextLine(); 
@@ -75,18 +109,9 @@ public class BankingApp {
 			
 		}
 		
-//		 registering template
 //		AccountService as = new AccountService();
 //		as.viewAllAccounts();
-//		System.out.println("Enter username");
-//		String username = scan.next();
-//		
-//		System.out.println("Enter password");
-//		String password = scan.next();
-//		
-//		User u = new User(username, password, Role.Customer, null);
-//		UserService us = new UserService();
-//		us.register(u);
+
 
 	}
 }
