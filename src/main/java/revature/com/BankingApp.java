@@ -17,8 +17,6 @@ public class BankingApp {
 	public static void main(String[] args) {
 
 		 run();
-//		AccountService as = new AccountService();
-//		as.viewAllAccounts();
 
 	}
 
@@ -32,12 +30,17 @@ public class BankingApp {
 			
 			
 			try {
-				
+				/*
+				 * Main menu
+				 * */
 				System.out.println("Please press 1 to register if you are a new customer \n"
 						+ "Please press 2 to log-in if you are a current customer \n"
 						+ "Please press 3 to exit the Bank");
 				int entry = scan.nextInt();
 				
+				/*
+				 * Logging-in menu
+				 * */
 				if(entry == 2) {
 					
 					//Logging-in for an existing user
@@ -49,6 +52,9 @@ public class BankingApp {
 					}
 					
 					
+					/*
+					 * New user registration menu
+					 * */
 				}else if (entry == 1) {
 					
 					//Registration for a new customer
@@ -66,12 +72,11 @@ public class BankingApp {
 							User u = new User(username, password, Role.Customer, null);
 							UserService us = new UserService();
 							us.register(u);
+							System.out.println("Welcome new customer. Use your username: "+username+" to log-in\n");
+							registrationRunning = false;  //New user registered
 						} catch (UsernameAlreadyExistsException e) {
 							System.out.println(e.getMessage()); 
-						} finally {
-							scan.nextLine();
-						}
-						
+						}  
 						
 					}
 					

@@ -16,7 +16,7 @@ public class ConnectionUtility {
 	public static Connection getConnection() {
 		try {
 			if (conn != null && !conn.isClosed()) {
-				System.out.println("There is an active connection in use!");
+				//System.out.println("There is an active connection in use!");
 				return conn;
 			}
 		} catch (SQLException e) {

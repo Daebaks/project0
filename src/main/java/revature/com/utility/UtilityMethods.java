@@ -35,10 +35,11 @@ public class UtilityMethods {
 				}
 			}
 			
+			conn.close();
 		} catch (SQLException e) {
 			System.out.println("SQL failure in validateUsername utility method");
 			e.printStackTrace();
-		}
+		} 
 		
 		
 		

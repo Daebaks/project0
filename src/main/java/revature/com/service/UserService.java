@@ -11,7 +11,7 @@ public class UserService {
 	
 	public User register(User u) {
 		
-		System.out.println("Loading...");
+		System.out.println("Loading...\n");
 		
 		if(u.getId() != 0) {
 			throw new NewUserRegistrationFailedException("Invalid user registration because id was not zero!");
