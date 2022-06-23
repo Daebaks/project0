@@ -1,60 +1,91 @@
 package revature.com.models;
 
+import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Objects;
 import java.util.Random;
 
-public class Account {
+public class Account implements Serializable {
 
-	public static int GLOBAL_ACOUNT_NUMBER = 1;
-	private int accountNumber;
-	private double balance = 0;
-
+	private int id;						//Unique id# for the account
+	private double balance;		//The balance
+	private int user_a_id;		    //User's id for this account's holder
+	private boolean active;		    //Validity of the account
+	
+	
 	public Account() {
-		this.accountNumber = accountNumber;
-		this.balance = balance;
-		setAccountNumber();
-	}
-
-	public Account(int accountNumber, double balance) {
 		super();
-		this.accountNumber = accountNumber;
+	}
+
+
+	public Account(int id, double balance, int user_a_id, boolean active) {
+		super();
+		this.id = id;
 		this.balance = balance;
-		setAccountNumber();
+		this.user_a_id = user_a_id;
+		this.active = active;
 	}
 
-	public int getAccountNumber() {
-		return accountNumber;
+
+	public Account(double balance, int user_a_id, boolean active) {
+		super();
+		this.balance = balance;
+		this.user_a_id = user_a_id;
+		this.active = active;
 	}
 
-	public void setAccountNumber() {
-		BigInteger b = new BigInteger(256, new Random());
-		GLOBAL_ACOUNT_NUMBER += Math.abs(b.intValue() + ((int) (10 * Math.random())));
-		this.accountNumber = GLOBAL_ACOUNT_NUMBER;
+
+	public int getId() {
+		return id;
 	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 
 	public double getBalance() {
 		return balance;
 	}
 
+
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 
+
+	public int getUser_a_id() {
+		return user_a_id;
+	}
+
+
+	public void setUser_a_id(int user_a_id) {
+		this.user_a_id = user_a_id;
+	}
+
+
+	public boolean isActive() {
+		return active;
+	}
+
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Account [accountNumber=" + accountNumber + ", balance=" + balance + "]";
+		return "Account [id=" + id + ", balance=" + balance + ", user_a_id=" + user_a_id + ", active=" + active + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + accountNumber;
-		long temp;
-		temp = Double.doubleToLongBits(balance);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
+		return Objects.hash(active, balance, id, user_a_id);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -65,11 +96,12 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
-		if (accountNumber != other.accountNumber)
-			return false;
-		if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
-			return false;
-		return true;
+		return active == other.active && Double.doubleToLongBits(balance) == Double.doubleToLongBits(other.balance)
+				&& id == other.id && user_a_id == other.user_a_id;
 	}
 
+	
+	
+	
+	 
 }
