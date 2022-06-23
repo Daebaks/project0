@@ -24,9 +24,9 @@ public class ConnectionUtility {
 			return null;
 		}
 		
-		String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=BankingApp";
-		String username = "postgres";
-		String password = "postgres95";
+		String url = System.getenv("DB-URL");
+		String username = System.getenv("DB-USERNAME");
+		String password = System.getenv("DB-PASSWORD");
 		
 		try {
 			conn = DriverManager.getConnection(url, username, password);
