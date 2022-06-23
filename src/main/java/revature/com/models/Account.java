@@ -7,14 +7,14 @@ public class Account {
 
 	public static int GLOBAL_ACOUNT_NUMBER = 1;
 	private int accountNumber;
-	private double balance=0;
-	
+	private double balance = 0;
+
 	public Account() {
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 		setAccountNumber();
 	}
-	
+
 	public Account(int accountNumber, double balance) {
 		super();
 		this.accountNumber = accountNumber;
@@ -28,7 +28,7 @@ public class Account {
 
 	public void setAccountNumber() {
 		BigInteger b = new BigInteger(256, new Random());
-		GLOBAL_ACOUNT_NUMBER+=Math.abs(b.intValue()+((int) (10*Math.random())));		
+		GLOBAL_ACOUNT_NUMBER += Math.abs(b.intValue() + ((int) (10 * Math.random())));
 		this.accountNumber = GLOBAL_ACOUNT_NUMBER;
 	}
 
@@ -36,8 +36,6 @@ public class Account {
 		return balance;
 	}
 
-	
-	
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
@@ -73,7 +71,5 @@ public class Account {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }
