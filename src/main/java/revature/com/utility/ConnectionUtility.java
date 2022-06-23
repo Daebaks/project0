@@ -24,6 +24,7 @@ public class ConnectionUtility {
 			return null;
 		}
 		
+		//Getting env variables
 		String url = System.getenv("DB-URL");
 		String username = System.getenv("DB-USERNAME");
 		String password = System.getenv("DB-PASSWORD");
