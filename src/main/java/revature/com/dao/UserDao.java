@@ -14,34 +14,36 @@ public class UserDao implements UserDaoInterface {
 
 	@Override
 	public int insert(User u) {
-		
+
 		Connection conn = ConnectionUtility.getConnection();
-		
-		String sql = "INSERT INTO users (username, pwd, user_role) VALUES (?, ?, ?) RETURNING users.id";
+
+		 String sql = "INSERT INTO users (username, pwd, user_role) VALUES (?, ?, ?) RETURNING users.id";
+
+ 
 		try {
-			PreparedStatement s = conn.prepareStatement(sql);
-			
-			s.setString(1, u.getUsername());
-			s.setString(2, u.getPassword());
-			s.setObject(3, u.getRole(), Types.OTHER);
-			
+			PreparedStatement st = conn.prepareStatement(sql);
+
+			st.setString(1, u.getUsername());
+			st.setString(2, u.getPassword());
+			st.setObject(3, u.getRole(), Types.OTHER);
+
 			ResultSet rs;
-			
-			if(!(rs = s.executeQuery()).equals(null)) {
-				
+
+			if (!(rs = st.executeQuery()).equals(null)) {
+
 				rs.next();
-				
+
 				int id = rs.getInt(1);
-				
+
 				return id;
-				
+
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("Unable to create user! SQL - exception!");
 			e.printStackTrace();
 		}
-		
+
 		return -1;
 	}
 

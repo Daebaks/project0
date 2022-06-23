@@ -1,9 +1,7 @@
 package revature.com.models;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Objects;
-import java.util.Random;
 
 public class Account implements Serializable {
 
@@ -77,7 +75,7 @@ public class Account implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", balance=" + balance + ", user_a_id=" + user_a_id + ", active=" + active + "]";
+		return "Account [id=" + id + ", balance=" + balance + ", users_a_id=" + user_a_id + ", active=" + active + "]";
 	}
 
 
