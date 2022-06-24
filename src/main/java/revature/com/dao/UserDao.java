@@ -64,7 +64,7 @@ public class UserDao implements UserDaoInterface {
 		
 		try(Connection conn = ConnectionUtility.getConnection();) {
 			
-			String sql = String.format("SELECT *  FROM users WHERE username = ?");
+			String sql = "SELECT *  FROM users WHERE username = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, username);
 			ResultSet rs = st.executeQuery();

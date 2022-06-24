@@ -7,7 +7,7 @@ public class Account implements Serializable {
 
 	private int id;						//Unique id# for the account
 	private double balance;		//The balance
-	private int user_a_id;		    //User's id for this account's holder
+	private int users_a_id;		    //User's id for this account's holder
 	private boolean active;		    //Validity of the account
 	
 	
@@ -16,19 +16,19 @@ public class Account implements Serializable {
 	}
 
 
-	public Account(int id, double balance, int user_a_id, boolean active) {
+	public Account(int id, double balance, int users_a_id, boolean active) {
 		super();
 		this.id = id;
 		this.balance = balance;
-		this.user_a_id = user_a_id;
+		this.users_a_id = users_a_id;
 		this.active = active;
 	}
 
 
-	public Account(double balance, int user_a_id, boolean active) {
+	public Account(double balance, int users_a_id, boolean active) {
 		super();
 		this.balance = balance;
-		this.user_a_id = user_a_id;
+		this.users_a_id = users_a_id;
 		this.active = active;
 	}
 
@@ -53,13 +53,13 @@ public class Account implements Serializable {
 	}
 
 
-	public int getUser_a_id() {
-		return user_a_id;
+	public int getUsers_a_id() {
+		return users_a_id;
 	}
 
 
-	public void setUser_a_id(int user_a_id) {
-		this.user_a_id = user_a_id;
+	public void setUsers_a_id(int users_a_id) {
+		this.users_a_id = users_a_id;
 	}
 
 
@@ -75,13 +75,13 @@ public class Account implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", balance=" + balance + ", users_a_id=" + user_a_id + ", active=" + active + "]";
+		return "Account [id=" + id + ", balance=" + balance + ", users_a_id=" + users_a_id + ", active=" + active + "]";
 	}
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(active, balance, id, user_a_id);
+		return Objects.hash(active, balance, id, users_a_id);
 	}
 
 
@@ -95,7 +95,7 @@ public class Account implements Serializable {
 			return false;
 		Account other = (Account) obj;
 		return active == other.active && Double.doubleToLongBits(balance) == Double.doubleToLongBits(other.balance)
-				&& id == other.id && user_a_id == other.user_a_id;
+				&& id == other.id && users_a_id == other.users_a_id;
 	}
 
 	

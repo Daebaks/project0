@@ -13,7 +13,6 @@ public class AccountService {
 	
 	public void viewAllAccounts() {
 		List<Account> accList = adao.findAll();
-		
 		for(Account a: accList) {
 			System.out.println(a);
 		}

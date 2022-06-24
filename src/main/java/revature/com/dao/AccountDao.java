@@ -1,9 +1,11 @@
 package revature.com.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,11 +50,10 @@ public class AccountDao implements AccountDaoInterface {
 			e.printStackTrace();
 		}
 		
-		 
-		
 		return accList;
 	}
 
+	
 	@Override
 	public Account findById(int id) {
 		// TODO Auto-generated method stub
@@ -60,11 +61,51 @@ public class AccountDao implements AccountDaoInterface {
 	}
 
 	@Override
-	public List<Account> findByOwner(int accHolderId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Account> findByOwner(int userOwnerId) {
+		
+		List <Account> ownerAccList = new ArrayList<>();
+		
+		
+		
+		try(Connection conn = ConnectionUtility.getConnection();) {
+			String sql = "SELECT  u.username,  a.id, a.balance, a.active FROM users u \n"
+					+ "INNER JOIN accounts a \n"
+					+ "ON u.id = a.users_a_id \n"
+					+ "WHERE u.id = ?";
+			
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, userOwnerId);
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				Account a = new Account();
+				
+				a.setId(rs.getInt("id"));
+				a.setUsers_a_id(rs.getInt("users_a_id"));
+				a.setBalance(rs.getDouble("balance"));
+				a.setActive(rs.getBoolean("active"));
+				
+				ownerAccList.add(a);
+				
+			}
+			
+		}
+
+
+ catch (SQLException e) {
+	System.out.println("SQL failure inside AccountDao findByOwner()");
+	e.printStackTrace();
+}
+		
+		return ownerAccList;
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public boolean update(Account a) {
 		// TODO Auto-generated method stub
