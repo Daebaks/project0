@@ -7,6 +7,7 @@ import revature.com.dao.AccountDao;
 import revature.com.dao.AccountDaoInterface;
 import revature.com.dao.UserDao;
 import revature.com.dao.UserDaoInterface;
+import revature.com.exceptions.NoAccountsExistException;
 import revature.com.exceptions.UsernameAlreadyExistsException;
 import revature.com.exceptions.UsernameNotFoundException;
 import revature.com.exceptions.WrongPasswordException;
@@ -101,7 +102,11 @@ public class BankingApp {
 												if(customerEntry==1) {
 													//Print account owned by the customer
 													System.out.println("======Your Account(s)======");
-													as.viewOwnerAccListById(loggedInUser.getId());
+													try {
+														as.viewOwnerAccListById(loggedInUser.getId());
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													}
 													System.out.println("===========================\n");
 													
 												} else if(customerEntry==2) {
