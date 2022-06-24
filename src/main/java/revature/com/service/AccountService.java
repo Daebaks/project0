@@ -17,4 +17,11 @@ public class AccountService {
 			System.out.println(a);
 		}
 	}
+	
+	public void viewOwnerAccListById(int userId) {
+		for(Account a: adao.findByOwner(userId)) {
+			System.out.println(a);
+		}
+		
+	}
 }
