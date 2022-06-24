@@ -100,9 +100,21 @@ public class AccountDao implements AccountDaoInterface {
 	}
 	
 	@Override
-	public double updateBalanceById(double newBalance, int accId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void updateBalanceById(double newBalance, int id) {
+		
+		try (Connection conn = ConnectionUtility.getConnection();) {
+			
+			String sql = "UPDATE accounts SET balance = ? WHERE id = ?";
+			
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setDouble(1, newBalance);
+			st.setInt(2, id);
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			System.out.println("SQL failure inside AccountDao updateBalanceById()");
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

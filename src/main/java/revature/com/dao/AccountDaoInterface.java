@@ -18,7 +18,7 @@ public interface AccountDaoInterface {
 	//Updating
 	boolean update(Account a);
 	
-	double updateBalanceById(double newBalance, int accId); //updates account balance by account id if possible and returns new balance
+	void updateBalanceById(double newBalance, int id); //updates account balance by account id if possible
 	
 	//Deleting
 	boolean delete(Account a);
