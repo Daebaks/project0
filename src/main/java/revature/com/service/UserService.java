@@ -30,5 +30,18 @@ public class UserService {
 		return u;
 		
 	}
+	
+	public User getByUsername() {
+		
+		
+		return null;
+		
+	}
 
+	
+	
+	public User viewByUsername(String u) {
+		return  udao.findByUsername(u);
+	}
+	
 }

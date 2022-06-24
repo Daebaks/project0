@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import revature.com.models.Account;
+import revature.com.models.Role;
 import revature.com.models.User;
 import revature.com.utility.ConnectionUtility;
 
@@ -57,7 +58,34 @@ public class UserDao implements UserDaoInterface {
 
 	@Override
 	public User findByUsername(String username) {
-		// TODO Auto-generated method stub
+		
+		
+		Connection conn = ConnectionUtility.getConnection();
+		String sql = String.format("SELECT id, username, pwd, user_role  FROM users WHERE username =  \'%s\'", username);
+		try {
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if(rs.next()) {
+				
+				User u = new User();
+				
+				u.setId(rs.getInt("id"));
+				u.setUsername(username);
+				u.setPassword(rs.getString("pwd"));
+				u.setRole(Role.valueOf(rs.getString("user_role")));
+				u.setAccounts(null);
+				
+				return u;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL failure in findByUsername UserDao");
+			e.printStackTrace();
+		}
+		
+		
+	 
+		
 		return null;
 	}
 
