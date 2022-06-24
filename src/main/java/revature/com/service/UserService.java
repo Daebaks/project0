@@ -40,8 +40,15 @@ public class UserService {
 
 	
 	
-	public User viewByUsername(String u) {
-		return  udao.findByUsername(u);
+	public User login(String username, String password) {
+		
+		
+		
+		
+		
+		return null;
+		
+		
 	}
 	
 }

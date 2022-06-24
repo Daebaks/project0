@@ -59,24 +59,23 @@ public class UserDao implements UserDaoInterface {
 	@Override
 	public User findByUsername(String username) {
 		
+		User u = new User();
 		
-		Connection conn = ConnectionUtility.getConnection();
-		String sql = String.format("SELECT id, username, pwd, user_role  FROM users WHERE username =  \'%s\'", username);
-		try {
-			Statement st = conn.createStatement();
+		try(Connection conn = ConnectionUtility.getConnection();) {
+			
+			String sql = String.format("SELECT *  FROM users WHERE username = ?");
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, username);
 			ResultSet rs = st.executeQuery(sql);
-			if(rs.next()) {
-				
-				User u = new User();
+			
+			if(rs != null) {
 				
 				u.setId(rs.getInt("id"));
-				u.setUsername(username);
+				u.setUsername("username");
 				u.setPassword(rs.getString("pwd"));
 				u.setRole(Role.valueOf(rs.getString("user_role")));
-				u.setAccounts(null);
 				
-				return u;
-			}
+			} 
 			
 		} catch (SQLException e) {
 			System.out.println("SQL failure in findByUsername UserDao");
@@ -86,7 +85,7 @@ public class UserDao implements UserDaoInterface {
 		
 	 
 		
-		return null;
+		return u;
 	}
 
 	@Override

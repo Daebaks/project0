@@ -50,26 +50,34 @@ public class BankingApp {
 					while(loggedInRunning) {
 						
 						
-						try {
-							System.out.println("Enter username");
-							String username = scan.next();
-							UtilityMethods.validateLoginUsername(username);
-							
-							System.out.println("Enter password");
-							String password = scan.next();
-							UtilityMethods.validateLoginPassword(username,password);
-							System.out.println("Successful log in\n");
-							
-							//Handle roles here and then create each role's menu
-							UserService us = new UserService();
-							System.out.println(us.viewByUsername(username).toString()); 
-							
-							
-						} catch (UsernameNotFoundException e) {
-							System.out.println(e.getMessage()); 
-						}  catch (WrongPasswordException e){
-							System.out.println(e.getMessage()); 
-						}
+//						try {
+//							System.out.println("Enter username");
+//							String username = scan.next();
+//							UtilityMethods.validateLoginUsername(username);
+//							
+//							System.out.println("Enter password");
+//							String password = scan.next();
+//							UtilityMethods.validateLoginPassword(username,password);
+//							System.out.println("Successful log in\n");
+//							
+//							//Handle roles here and then create each role's menu
+//							UserService us = new UserService();
+//							System.out.println(us.viewByUsername(username).toString()); 
+//							
+//							
+//						} catch (UsernameNotFoundException e) {
+//							System.out.println(e.getMessage()); 
+//						}  catch (WrongPasswordException e){
+//							System.out.println(e.getMessage()); 
+//						}
+						
+						
+						
+						
+						
+						
+						
+						
 						
 						
 						
@@ -77,14 +85,7 @@ public class BankingApp {
 						
 					}
 				
-					
-					
-					
-					
 				}
-					
-				
-				
 				
 				
 				
