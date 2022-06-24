@@ -58,11 +58,11 @@ public class BankingApp {
 							System.out.println("Enter password");
 							String password = scan.next();
 							 
-							System.out.println("Successful log in\n");
+							
 							
 							//Handle roles here and then create each role's menu
 							UserService us = new UserService();
-							
+							us.login(username, password);
 							
 							
 						} catch (UsernameNotFoundException e) {

@@ -18,7 +18,7 @@ public class UserService {
 
 		//Validate username if it's taken before registering
 		User uEntered = udao.findByUsername(u.getUsername());
-		if(uEntered!=null) {
+		if(uEntered.getUsername()!=null) {
 			throw new UsernameAlreadyExistsException("Username "+u.getUsername()+" is taken. Please choose a different username");
 		}
 		
@@ -53,7 +53,7 @@ public class UserService {
 
 		System.out.println("Loading...\n");
 		
-		if (u == null) {
+		if (u.getUsername() == null) {
 			throw new UsernameNotFoundException("Username " + username + " does not exist in the DB. Try again");
 		}
 
