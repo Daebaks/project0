@@ -112,8 +112,8 @@ public class BankingApp {
 												
 											} catch (InputMismatchException e) {
 												System.out.println("Invalid input. Please try again\n");
-												e.printStackTrace();
-											}
+												scan.nextLine();
+											} 
 											
 											
 											
@@ -153,9 +153,9 @@ public class BankingApp {
 							
 						} catch (InputMismatchException e) {
 							System.out.println("Invalid input. Please try again\n");
-							e.printStackTrace();
+							scan.nextLine();
 						} 
-						
+					 
 						
 						
 						
