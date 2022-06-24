@@ -18,143 +18,121 @@ public class BankingApp {
 
 	public static void main(String[] args) {
 
-		 run();
+		run();
 
 	}
 
 	public static void run() {
 
 		System.out.println("Welcome to the Bank");
-		
-		boolean mainRunning = true;   //Keeping the main loop to run the program until user quits
-		
-		while(mainRunning) {
-			
-			
+
+		boolean mainRunning = true; // Keeping the main loop to run the program until user quits
+
+		while (mainRunning) {
+
 			try {
 				/*
 				 * Main menu
-				 * */
+				 */
 				System.out.println("Please press 1 to register if you are a new customer \n"
 						+ "Please press 2 to log-in if you are a current customer \n"
 						+ "Please press 3 to exit the Bank");
 				int entry = scan.nextInt();
-				
+
 				/*
 				 * Logging-in menu
-				 * */
-				if(entry == 2) {
-					
-					//Logging-in for an existing user
+				 */
+				if (entry == 2) {
+
+					// Logging-in for an existing user
 					boolean loggedInRunning = true;
-					while(loggedInRunning) {
-						
-						
+					while (loggedInRunning) {
+
 						try {
 							System.out.println("Enter username");
 							String username = scan.next();
-							 
-							
+
 							System.out.println("Enter password");
 							String password = scan.next();
-							 
+
 							UserService us = new UserService();
-							us.login(username, password);
+
+							User loggedInUser = us.login(username, password);
+
+							Role role = loggedInUser.getRole();
+							// Handle roles here and then create each role's menu/portal
+							switch (role) {
+							case Customer:
+
+								break;
+							case Employee:
+
+								break;
+							case Admin:
+
+								break;
+							default:
+								break;
+							}
 							
-							
-							//Handle roles here and then create each role's menu/portal
-							
-							
-							
+
 						} catch (UsernameNotFoundException e) {
-							System.out.println(e.getMessage()); 
-						}  catch (WrongPasswordException e){
-							System.out.println(e.getMessage()); 
+							System.out.println(e.getMessage());
+						} catch (WrongPasswordException e) {
+							System.out.println(e.getMessage());
 						}
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
+
 					}
-				
+
 				}
-				
-				
-				
-				   /*  
-					 * New user registration menu
-					 * */
-				 else if (entry == 1) {
-					
-					//Registration for a new customer
+
+				/*
+				 * New user registration menu
+				 */
+				else if (entry == 1) {
+
+					// Registration for a new customer
 					boolean registrationRunning = true;
-					while(registrationRunning) {
-						
+					while (registrationRunning) {
+
 						try {
 							System.out.println("Enter username");
 							String username = scan.next();
-							 
-							
+
 							System.out.println("Enter password");
 							String password = scan.next();
-							
+
 							User u = new User(username, password, Role.Customer, null);
 							UserService us = new UserService();
 							us.register(u);
-							System.out.println("Welcome new customer. Use your username: "+username+" to log-in\n");
-							registrationRunning = false;  //New user registered
+							System.out.println("Welcome new customer. Use your username: " + username + " to log-in\n");
+							registrationRunning = false; // New user registered
 						} catch (UsernameAlreadyExistsException e) {
-							System.out.println(e.getMessage()); 
-						}  
-						
+							System.out.println(e.getMessage());
+						}
+
 					}
-					
-					
-				} else if(entry == 3) {
-					
-					mainRunning = false;   //To quit the program
+
+				} else if (entry == 3) {
+
+					mainRunning = false; // To quit the program
 					System.out.println("\nThank you for using the Bank");
 				} else {
-					
+
 					System.out.println("invalid input. Please try again \n");
 				}
 			} catch (InputMismatchException e) {
-				
+
 				System.out.println("invalid input. Please try again \n");
 			} finally {
-				
-				scan.nextLine(); 
+
+				scan.nextLine();
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 		}
-		
+
 //		AccountService as = new AccountService();
 //		as.viewAllAccounts();
-
 
 	}
 }
