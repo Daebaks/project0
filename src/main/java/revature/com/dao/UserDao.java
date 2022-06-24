@@ -60,6 +60,7 @@ public class UserDao implements UserDaoInterface {
 	public User findByUsername(String username) {
 		
 		User u = new User();
+		u = null;
 		
 		try(Connection conn = ConnectionUtility.getConnection();) {
 			
