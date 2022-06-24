@@ -24,7 +24,7 @@ public class BankingApp {
 
 	public static void run() {
 
-		System.out.println("Welcome to the Bank");
+		System.out.println("Welcome to the Bank \n");
 
 		boolean mainRunning = true; // Keeping the main loop to run the program until user quits
 
@@ -34,54 +34,99 @@ public class BankingApp {
 				/*
 				 * Main menu
 				 */
-				System.out.println("Please press 1 to register if you are a new customer \n"
+				System.out.println("==Main Menu== \n\n"
+						+ "Please press 1 to register if you are a new customer \n"
 						+ "Please press 2 to log-in if you are a current customer \n"
 						+ "Please press 3 to exit the Bank");
-				int entry = scan.nextInt();
+				int mainEntry = scan.nextInt();
 
 				/*
 				 * Logging-in menu
 				 */
-				if (entry == 2) {
+				if (mainEntry == 2) {
 
 					// Logging-in for an existing user
 					boolean loggedInRunning = true;
 					while (loggedInRunning) {
-
+						System.out.println("==Logging-in Menu== \n\n"
+								+ "Please press 1 to enter your credentials \n"
+								+ "Please press 2 to go back to the main menu \n");
+								
+						
 						try {
-							System.out.println("Enter username");
-							String username = scan.next();
+							
+							int loggedEntry = scan.nextInt();
+							
+							if(loggedEntry==1) {
+								//logging-in
+								try {
+									System.out.println("Enter username");
+									String username = scan.next();
 
-							System.out.println("Enter password");
-							String password = scan.next();
+									System.out.println("Enter password");
+									String password = scan.next();
 
-							UserService us = new UserService();
+									UserService us = new UserService();
 
-							User loggedInUser = us.login(username, password);
+									User loggedInUser = us.login(username, password);
 
-							Role role = loggedInUser.getRole();
-							// Handle roles here and then create each role's menu/portal
-							switch (role) {
-							case Customer:
+									Role role = loggedInUser.getRole();
+									// Handle roles here and then create each role's menu/portal
+									switch (role) {
+									case Customer:
+										boolean cutomerLoggedIn=true;
+										while(cutomerLoggedIn) {
+											
+											
+											
+											
+											
+											
+											
+											
+										}
+										
+										
+										break;
+									case Employee:
 
-								break;
-							case Employee:
+										break;
+									case Admin:
 
-								break;
-							case Admin:
+										break;
+									default:
+										break;
+									}
+									
 
-								break;
-							default:
-								break;
+								} catch (UsernameNotFoundException e) {
+									System.out.println(e.getMessage());
+									loggedInRunning = false;
+								} catch (WrongPasswordException e) {
+									System.out.println(e.getMessage());
+								}
+
+								
+								
+								
+							}else if(loggedEntry==2) {
+								loggedInRunning = false;
+							}  else {
+								System.out.println("Invalid input. Please try again\n");
 							}
 							
-
-						} catch (UsernameNotFoundException e) {
-							System.out.println(e.getMessage());
-						} catch (WrongPasswordException e) {
-							System.out.println(e.getMessage());
-						}
-
+						} catch (InputMismatchException e) {
+							System.out.println("Invalid input. Please try again\n");
+							e.printStackTrace();
+						} 
+						
+						
+						
+						
+						
+						
+						
+						
 					}
 
 				}
@@ -89,7 +134,7 @@ public class BankingApp {
 				/*
 				 * New user registration menu
 				 */
-				else if (entry == 1) {
+				else if (mainEntry == 1) {
 
 					// Registration for a new customer
 					boolean registrationRunning = true;
@@ -113,7 +158,7 @@ public class BankingApp {
 
 					}
 
-				} else if (entry == 3) {
+				} else if (mainEntry == 3) {
 
 					mainRunning = false; // To quit the program
 					System.out.println("\nThank you for using the Bank");
