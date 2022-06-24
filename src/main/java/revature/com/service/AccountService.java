@@ -5,15 +5,19 @@ import java.util.List;
 
 import revature.com.dao.AccountDao;
 import revature.com.dao.AccountDaoInterface;
+import revature.com.dao.UserDao;
+import revature.com.dao.UserDaoInterface;
 import revature.com.exceptions.InsufficientBalanceException;
 import revature.com.exceptions.InvalidAmountOfMoneyException;
 import revature.com.exceptions.NoAccountsExistException;
 import revature.com.exceptions.UsernameNotFoundException;
 import revature.com.models.Account;
+import revature.com.models.User;
 
 public class AccountService {
 
 	private AccountDaoInterface adao = new AccountDao();
+	private UserDaoInterface udao = new UserDao();
 	
 	public void viewAllAccounts() {
 		List<Account> accList = adao.findAll();
@@ -37,11 +41,18 @@ public class AccountService {
 	}
 	
 	//Withdraws amount from account using account id
-	public double withdraw(double amount, int id) {
+	public double withdraw(double amount, int id, int custId) {
 		
 		Account a = adao.findById(id);
-		if(a==null) {
-			throw new NoAccountsExistException("No such accounts with this id = "+id);
+		 
+		//Get the user ID to match it
+		User u = udao.findById(custId);
+		 
+		
+		if(u!=null) {
+			if(u.getId()!=a.getUsers_a_id()) {
+				throw new NoAccountsExistException("No such accounts with this id = "+id); //this is for the user's Account list only not all accounts in the bank
+			}
 		}
 		if(amount <=0) {
 			throw new InvalidAmountOfMoneyException("Amount to withdraw must be greater than 0 $");

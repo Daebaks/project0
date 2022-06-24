@@ -3,10 +3,8 @@ package revature.com;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import revature.com.dao.AccountDao;
-import revature.com.dao.AccountDaoInterface;
-import revature.com.dao.UserDao;
-import revature.com.dao.UserDaoInterface;
+import revature.com.exceptions.InsufficientBalanceException;
+import revature.com.exceptions.InvalidAmountOfMoneyException;
 import revature.com.exceptions.NoAccountsExistException;
 import revature.com.exceptions.UsernameAlreadyExistsException;
 import revature.com.exceptions.UsernameNotFoundException;
@@ -15,7 +13,6 @@ import revature.com.models.Role;
 import revature.com.models.User;
 import revature.com.service.AccountService;
 import revature.com.service.UserService;
-import revature.com.utility.UtilityMethods;
 
 public class BankingApp {
 
@@ -111,6 +108,28 @@ public class BankingApp {
 													
 												} else if(customerEntry==2) {
 													//Withdraw from account
+													try {
+														
+														System.out.println("Please select account id to withdraw from");
+														int withdrawAccId = scan.nextInt();
+														System.out.println("Please specify the amount of money to withdraw");
+														double withdrawAmount = scan.nextDouble();
+														
+														
+														double newBalance = as.withdraw(withdrawAmount, withdrawAccId, loggedInUser.getId() );
+														System.out.println("Withdraw was successful. New balance is: "+newBalance+"\n");
+														
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													}catch (InvalidAmountOfMoneyException e) {
+														System.out.println(e.getMessage());
+													}catch (InsufficientBalanceException e) {
+														System.out.println(e.getMessage());
+													}catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													
 													
 												} else if  (customerEntry==3) {
 													//Deposit to an account

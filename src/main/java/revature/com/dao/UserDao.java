@@ -52,40 +52,58 @@ public class UserDao implements UserDaoInterface {
 
 	@Override
 	public User findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User findByUsername(String username) {
-		
 		User u = new User();
-		
-		
-		try(Connection conn = ConnectionUtility.getConnection();) {
-			
-			String sql = "SELECT *  FROM users WHERE username = ?";
+
+		try (Connection conn = ConnectionUtility.getConnection();) {
+
+			String sql = "SELECT *  FROM users WHERE id = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, username);
+			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
-			
-			if(rs.next()) {
-				
+
+			if (rs.next()) {
+
 				u.setId(rs.getInt("id"));
 				u.setUsername(rs.getString("username"));
 				u.setPassword(rs.getString("pwd"));
 				u.setRole(Role.valueOf(rs.getString("user_role")));
-				
-			} 
-			
+
+			}
+
 		} catch (SQLException e) {
 			System.out.println("SQL failure in findByUsername UserDao");
 			e.printStackTrace();
 		}
-		
-		
-	 
-		
+
+		return u;
+	}
+
+	@Override
+	public User findByUsername(String username) {
+
+		User u = new User();
+
+		try (Connection conn = ConnectionUtility.getConnection();) {
+
+			String sql = "SELECT *  FROM users WHERE username = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, username);
+			ResultSet rs = st.executeQuery();
+
+			if (rs.next()) {
+
+				u.setId(rs.getInt("id"));
+				u.setUsername(rs.getString("username"));
+				u.setPassword(rs.getString("pwd"));
+				u.setRole(Role.valueOf(rs.getString("user_role")));
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("SQL failure in findByUsername UserDao");
+			e.printStackTrace();
+		}
+
 		return u;
 	}
 
