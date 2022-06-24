@@ -4,6 +4,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import revature.com.exceptions.UsernameAlreadyExistsException;
+import revature.com.exceptions.UsernameNotFoundException;
+import revature.com.exceptions.WrongPasswordException;
 import revature.com.models.Role;
 import revature.com.models.User;
 import revature.com.service.AccountService;
@@ -48,14 +50,44 @@ public class BankingApp {
 					while(loggedInRunning) {
 						
 						
+						try {
+							System.out.println("Enter username");
+							String username = scan.next();
+							UtilityMethods.validateLoginUsername(username);
+							
+							System.out.println("Enter password");
+							String password = scan.next();
+							UtilityMethods.validateLoginPassword(username,password);
+							
+							
+							System.out.println("Successful log in\n");
+						} catch (UsernameNotFoundException e) {
+							System.out.println(e.getMessage()); 
+						}  catch (WrongPasswordException e){
+							System.out.println(e.getMessage()); 
+						}
+						
+						
+						
+						
 						
 					}
+				
 					
 					
-					/*
+					
+					
+				}
+					
+				
+				
+				
+				
+				
+				   /*  
 					 * New user registration menu
 					 * */
-				}else if (entry == 1) {
+				 else if (entry == 1) {
 					
 					//Registration for a new customer
 					boolean registrationRunning = true;
@@ -64,7 +96,7 @@ public class BankingApp {
 						try {
 							System.out.println("Enter username");
 							String username = scan.next();
-							UtilityMethods.validateUsername(username);
+							UtilityMethods.validateRegistrationUsername(username);
 							
 							System.out.println("Enter password");
 							String password = scan.next();
