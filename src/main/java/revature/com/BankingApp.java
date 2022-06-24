@@ -80,8 +80,8 @@ public class BankingApp {
 										boolean cutomerLoggedIn=true;
 										while(cutomerLoggedIn) {
 											System.out.println("==Customer Menu== \n\n"
-													+ "Welcome: "+loggedInUser.getUsername()
-													+ "\n Please press 1 to view your account(s) \n"
+													+ "Welcome: "+loggedInUser.getUsername()+" "+loggedInUser.toString()
+													+ "\nPlease press 1 to view your account(s) \n"
 													+ "Please press 2 to withdraw from your account \n"
 													+ "Please press 3 to deposit to your account"
 													+ "Please press 4 transfer between your accounts"
@@ -91,15 +91,20 @@ public class BankingApp {
 												
 												int customerEntry = scan.nextInt();
 												if(customerEntry==1) {
+													//Print account owned by the customer
 													
 												} else if(customerEntry==2) {
+													//Withdraw from account
 													
 												} else if  (customerEntry==3) {
+													//Deposit to an account
 													
 												}else if  (customerEntry==4) {
+													//Transfer between accounts
 													
 												}else if  (customerEntry==5) {
-													
+													System.out.println("Thank you. See you again\n");
+													cutomerLoggedIn = false;
 												} else {
 													System.out.println("Invalid input. Please try again\n");
 												}
@@ -132,7 +137,7 @@ public class BankingApp {
 
 								} catch (UsernameNotFoundException e) {
 									System.out.println(e.getMessage());
-									loggedInRunning = false;
+									
 								} catch (WrongPasswordException e) {
 									System.out.println(e.getMessage());
 								}
