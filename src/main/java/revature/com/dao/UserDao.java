@@ -60,16 +60,16 @@ public class UserDao implements UserDaoInterface {
 	public User findByUsername(String username) {
 		
 		User u = new User();
-		u = null;
+		
 		
 		try(Connection conn = ConnectionUtility.getConnection();) {
 			
 			String sql = String.format("SELECT *  FROM users WHERE username = ?");
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, username);
-			ResultSet rs = st.executeQuery(sql);
+			ResultSet rs = st.executeQuery();
 			
-			if(rs != null) {
+			if(rs.next()) {
 				
 				u.setId(rs.getInt("id"));
 				u.setUsername("username");
