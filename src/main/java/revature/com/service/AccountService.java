@@ -36,12 +36,12 @@ public class AccountService {
 		
 	}
 	
-	//Withdraws amount from account with the id = accId
-	public double withdraw(double amount, int accId) {
+	//Withdraws amount from account using account id
+	public double withdraw(double amount, int id) {
 		
-		Account a = adao.findById(accId);
+		Account a = adao.findById(id);
 		if(a==null) {
-			throw new NoAccountsExistException("No such accounts with this id = "+accId);
+			throw new NoAccountsExistException("No such accounts with this id = "+id);
 		}
 		if(amount <=0) {
 			throw new InvalidAmountOfMoneyException("Amount to withdraw must be greater than 0 $");
@@ -53,9 +53,29 @@ public class AccountService {
 		//If all of the above pass, then balance will be updated.
 		double newBalance = a.getBalance()-amount;
 		
-		adao.updateBalanceById(newBalance, accId);
+		adao.updateBalanceById(newBalance, id);
 		
 		return newBalance;
 		
 	}
+	
+	//Deposit amount to account using id
+	public double deposit(double amount, int id) {
+		Account a = adao.findById(id);
+		if(a==null) {
+			throw new NoAccountsExistException("No such accounts with this id = "+id);
+		}
+		if(amount <=0) {
+			throw new InvalidAmountOfMoneyException("Amount to deposit must be greater than 0 $");
+		}
+		
+		//If all of the above pass, then balance will be updated.
+				double newBalance = a.getBalance()+amount;
+				
+				adao.updateBalanceById(newBalance, id);
+				
+				return newBalance;
+		
+	}
+	
 }
