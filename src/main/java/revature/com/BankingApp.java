@@ -73,11 +73,42 @@ public class BankingApp {
 									Role role = loggedInUser.getRole();
 									// Handle roles here and then create each role's menu/portal
 									switch (role) {
+									/*
+									 * Customer menu
+									 */
 									case Customer:
 										boolean cutomerLoggedIn=true;
 										while(cutomerLoggedIn) {
+											System.out.println("==Customer Menu== \n\n"
+													+ "Welcome: "+loggedInUser.getUsername()
+													+ "\n Please press 1 to view your account(s) \n"
+													+ "Please press 2 to withdraw from your account \n"
+													+ "Please press 3 to deposit to your account"
+													+ "Please press 4 transfer between your accounts"
+													+ "Please press 5 to go back to the previous menu");
 											
-											
+											try {
+												
+												int customerEntry = scan.nextInt();
+												if(customerEntry==1) {
+													
+												} else if(customerEntry==2) {
+													
+												} else if  (customerEntry==3) {
+													
+												}else if  (customerEntry==4) {
+													
+												}else if  (customerEntry==5) {
+													
+												} else {
+													System.out.println("Invalid input. Please try again\n");
+												}
+												
+												
+											} catch (InputMismatchException e) {
+												System.out.println("Invalid input. Please try again\n");
+												e.printStackTrace();
+											}
 											
 											
 											
