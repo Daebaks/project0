@@ -30,6 +30,11 @@ public class BankingApp {
 
 		System.out.println("Welcome to the Bank \n");
 
+		UserService us = new UserService();
+		AccountService as = new AccountService();
+
+		
+		
 		boolean mainRunning = true; // Keeping the main loop to run the program until user quits
 
 		while (mainRunning) {
@@ -70,7 +75,6 @@ public class BankingApp {
 									System.out.println("Enter password");
 									String password = scan.next();
 
-									UserService us = new UserService();
 
 									User loggedInUser = us.login(username, password);
 
@@ -96,9 +100,8 @@ public class BankingApp {
 												int customerEntry = scan.nextInt();
 												if(customerEntry==1) {
 													//Print account owned by the customer
-													AccountService asi = new AccountService();
 													System.out.println("======Your Account(s)======");
-													asi.viewOwnerAccListById(loggedInUser.getId());
+													as.viewOwnerAccListById(loggedInUser.getId());
 													System.out.println("===========================\n");
 													
 												} else if(customerEntry==2) {
@@ -192,7 +195,6 @@ public class BankingApp {
 							String password = scan.next();
 
 							User u = new User(username, password, Role.Customer, null);
-							UserService us = new UserService();
 							us.register(u);
 							System.out.println("Welcome new customer. Use your username: " + username + " to log-in\n");
 							registrationRunning = false; // New user registered

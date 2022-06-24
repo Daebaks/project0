@@ -11,9 +11,7 @@ public interface AccountDaoInterface {
 	
 	//Reading
 	List<Account> findAll();
-	
 	Account findById(int id);
-	
 	List<Account> findByOwner(int accHolderId);
 	
 	//Updating
