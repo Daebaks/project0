@@ -84,7 +84,7 @@ public class BankingApp {
 										boolean cutomerLoggedIn=true;
 										while(cutomerLoggedIn) {
 											System.out.println("==Customer Menu== \n\n"
-													+ "Welcome: "+loggedInUser.getUsername()+" "+loggedInUser.toString()
+													+ "Welcome: "+loggedInUser.getUsername()
 													+ "\n\nPlease press 1 to view your account(s) \n"
 													+ "Please press 2 to withdraw from your account \n"
 													+ "Please press 3 to deposit to your account \n"
@@ -96,6 +96,10 @@ public class BankingApp {
 												int customerEntry = scan.nextInt();
 												if(customerEntry==1) {
 													//Print account owned by the customer
+													AccountService asi = new AccountService();
+													System.out.println("======Your Account(s)======");
+													asi.viewOwnerAccListById(loggedInUser.getId());
+													System.out.println("===========================\n");
 													
 												} else if(customerEntry==2) {
 													//Withdraw from account
