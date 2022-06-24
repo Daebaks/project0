@@ -3,6 +3,7 @@ package revature.com.service;
 import revature.com.dao.UserDao;
 import revature.com.dao.UserDaoInterface;
 import revature.com.exceptions.NewUserRegistrationFailedException;
+import revature.com.exceptions.UsernameAlreadyExistsException;
 import revature.com.exceptions.UsernameNotFoundException;
 import revature.com.exceptions.WrongPasswordException;
 import revature.com.models.User;
@@ -15,6 +16,12 @@ public class UserService {
 
 		System.out.println("Loading...\n");
 
+		//Validate username if it's taken before registering
+		User uEntered = udao.findByUsername(u.getUsername());
+		if(uEntered!=null) {
+			throw new UsernameAlreadyExistsException("Username "+u.getUsername()+" is taken. Please choose a different username");
+		}
+		
 		if (u.getId() != 0) {
 			throw new NewUserRegistrationFailedException("Invalid user registration because id was not zero!");
 		}
@@ -44,6 +51,8 @@ public class UserService {
 
 		User u = udao.findByUsername(username);
 
+		System.out.println("Loading...\n");
+		
 		if (u == null) {
 			throw new UsernameNotFoundException("Username " + username + " does not exist in the DB. Try again");
 		}
