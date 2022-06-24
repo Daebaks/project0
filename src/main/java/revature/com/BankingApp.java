@@ -81,11 +81,11 @@ public class BankingApp {
 										while(cutomerLoggedIn) {
 											System.out.println("==Customer Menu== \n\n"
 													+ "Welcome: "+loggedInUser.getUsername()+" "+loggedInUser.toString()
-													+ "\nPlease press 1 to view your account(s) \n"
+													+ "\n\nPlease press 1 to view your account(s) \n"
 													+ "Please press 2 to withdraw from your account \n"
-													+ "Please press 3 to deposit to your account"
-													+ "Please press 4 transfer between your accounts"
-													+ "Please press 5 to go back to the previous menu");
+													+ "Please press 3 to deposit to your account \n"
+													+ "Please press 4 transfer between your accounts \n"
+													+ "Please press 5 to go back to the previous menu \n");
 											
 											try {
 												
