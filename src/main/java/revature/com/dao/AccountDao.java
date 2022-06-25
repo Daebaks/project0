@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,9 +16,26 @@ import revature.com.utility.ConnectionUtility;
 public class AccountDao implements AccountDaoInterface {
 
 	@Override
-	public int insert(Account a) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int open(Account a, int userID) {
+		Connection conn = ConnectionUtility.getConnection();
+
+		String sql = "INSERT INTO accounts  (users_a_id) VALUES (?) RETURNING accounts.id";
+		
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, userID);
+			ResultSet rs;
+			if (!(rs = st.executeQuery()).equals(null)) {
+				rs.next();
+				int id = rs.getInt(1);
+				return id;
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Unable to create user! SQL - exception!");
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	@Override
