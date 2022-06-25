@@ -48,7 +48,7 @@ public class UserServiceTests {
 	}
 
 	// Testings
-	// ===============Testing register() method in UserService==============
+	//===============Testing register() method in UserService===================
 	@Test
 	public void testSuccessfulRigisterUserReturnsNewPKId() {
 
@@ -57,7 +57,7 @@ public class UserServiceTests {
 		dummyUser = new User(0, "Hila", "pass", Role.Admin, new LinkedList<Account>());
 
 		// Mocking findByUsername() dao method. Given username is clear to register
-		// i.e. username isn't taken
+		// i.e. username isn't taken and the return is null or empty new user
 		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(new User());
 
 		// Mocking inser() dao method
@@ -103,7 +103,32 @@ public class UserServiceTests {
 		when(mockDao.insert(dummyUser)).thenReturn(-1);
 		
 		us.register(dummyUser);
-
 	}
-
+	//===========================================================
+	
+	//===============Testing login() method in UserService====================
+	@Test
+	public void testLoginSuccessfulLogin() {
+		
+		//Strings
+		String username = "Mike";
+		String password = "pass";
+		
+		//In DB user
+		User foundInDB = new User();
+		foundInDB.setUsername("Mike");
+		foundInDB.setPassword("pass");
+		
+		//Entered credentials user
+		dummyUser.setUsername("Mike");
+		dummyUser.setPassword("pass");
+		
+		// Mocking findByUsername() dao method. Returning a user found in DB
+		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(foundInDB);
+		
+		us.login(username, password);
+		assertEquals(foundInDB.getUsername(),username );
+		assertEquals(foundInDB.getPassword(), password);
+		
+	}
 }
