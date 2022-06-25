@@ -16,7 +16,7 @@ public interface AccountDaoInterface {
 	boolean getStatusById(int id); //Get activity status of an account
 	
 	//Updating
-	boolean update(Account a);
+	void alterActivityById(int id,boolean active);
 	
 	void updateBalanceById(double newBalance, int id); //updates account balance by account id if possible
 	

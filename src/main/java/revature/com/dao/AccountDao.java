@@ -21,7 +21,7 @@ public class AccountDao implements AccountDaoInterface {
 		Connection conn = ConnectionUtility.getConnection();
 
 		String sql = "INSERT INTO accounts  (users_a_id) VALUES (?) RETURNING accounts.id";
-		
+
 		try {
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, userID);
@@ -62,16 +62,14 @@ public class AccountDao implements AccountDaoInterface {
 		return accList;
 	}
 
-	
-
 	@Override
 	public List<Account> findByOwner(int userOwnerId) {
 
 		List<Account> ownerAccList = new ArrayList<>();
 		try (Connection conn = ConnectionUtility.getConnection();) {
-			String sql = "SELECT  a.users_a_id , a.id, a.balance, a.active  FROM users u \n" + "INNER JOIN accounts a \n"
-					+ "ON u.id = a.users_a_id \n" + "WHERE u.id = ?";
-			
+			String sql = "SELECT  a.users_a_id , a.id, a.balance, a.active  FROM users u \n"
+					+ "INNER JOIN accounts a \n" + "ON u.id = a.users_a_id \n" + "WHERE u.id = ?";
+
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, userOwnerId);
 			ResultSet rs = st.executeQuery();
@@ -83,23 +81,21 @@ public class AccountDao implements AccountDaoInterface {
 				a.setActive(rs.getBoolean("active"));
 				ownerAccList.add(a);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("SQL failure inside AccountDao findByOwner()");
 			e.printStackTrace();
 		}
 		return ownerAccList;
 	}
 
-	
 	@Override
 	public Account findById(int id) {
 
 		Account a = new Account();
-		
+
 		try (Connection conn = ConnectionUtility.getConnection();) {
 			String sql = "SELECT  *  FROM accounts WHERE id = ?";
-			
+
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
@@ -109,36 +105,34 @@ public class AccountDao implements AccountDaoInterface {
 				a.setBalance(rs.getDouble("balance"));
 				a.setActive(rs.getBoolean("active"));
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("SQL failure inside AccountDao findById()");
 			e.printStackTrace();
 		}
-		
+
 		return a;
 	}
-	
+
 	@Override
 	public void updateBalanceById(double newBalance, int id) {
-		
+
 		try (Connection conn = ConnectionUtility.getConnection();) {
-			
+
 			String sql = "UPDATE accounts SET balance = ? WHERE id = ?";
-			
+
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setDouble(1, newBalance);
 			st.setInt(2, id);
 			st.executeUpdate();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("SQL failure inside AccountDao updateBalanceById()");
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public boolean getStatusById(int id) {
-		
+
 		boolean status = false;
 		try (Connection conn = ConnectionUtility.getConnection();) {
 
@@ -155,14 +149,24 @@ public class AccountDao implements AccountDaoInterface {
 			System.out.println("SQL failure - unable to get status");
 			e.printStackTrace();
 		}
-		
+
 		return status;
 	}
-	
+
 	@Override
-	public boolean update(Account a) {
-		// TODO Auto-generated method stub
-		return false;
+	public void alterActivityById(int id, boolean active) {
+		try (Connection conn = ConnectionUtility.getConnection();) {
+
+			String sql = "UPDATE accounts SET active = ? WHERE id = ?";
+
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setBoolean(1, active);
+			st.setInt(2, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL failure inside AccountDao updateBalanceById()");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -170,9 +174,5 @@ public class AccountDao implements AccountDaoInterface {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	
-
-	
 
 }
