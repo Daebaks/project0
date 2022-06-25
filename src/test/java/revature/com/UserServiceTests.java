@@ -14,6 +14,8 @@ import org.junit.Test;
 import revature.com.dao.UserDao;
 import revature.com.exceptions.NewUserRegistrationFailedException;
 import revature.com.exceptions.UsernameAlreadyExistsException;
+import revature.com.exceptions.UsernameNotFoundException;
+import revature.com.exceptions.WrongPasswordException;
 import revature.com.models.Account;
 import revature.com.models.Role;
 import revature.com.models.User;
@@ -48,7 +50,7 @@ public class UserServiceTests {
 	}
 
 	// Testings
-	//===============Testing register() method in UserService===================
+	// ===============Testing register() method in UserService===================
 	@Test
 	public void testSuccessfulRigisterUserReturnsNewPKId() {
 
@@ -101,34 +103,76 @@ public class UserServiceTests {
 
 		// Mocking inser() dao method. Returning -1
 		when(mockDao.insert(dummyUser)).thenReturn(-1);
-		
+
 		us.register(dummyUser);
 	}
-	//===========================================================
-	
-	//===============Testing login() method in UserService====================
+	// ===========================================================
+
+	// ===============Testing login() method in UserService====================
 	@Test
 	public void testLoginSuccessfulLogin() {
-		
-		//Strings
+
+		// Strings entered
 		String username = "Mike";
 		String password = "pass";
-		
-		//In DB user
+
+		// In DB user
 		User foundInDB = new User();
 		foundInDB.setUsername("Mike");
 		foundInDB.setPassword("pass");
-		
-		//Entered credentials user
+
+		// Entered credentials user
 		dummyUser.setUsername("Mike");
 		dummyUser.setPassword("pass");
-		
+
 		// Mocking findByUsername() dao method. Returning a user found in DB
 		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(foundInDB);
-		
+
 		us.login(username, password);
-		assertEquals(foundInDB.getUsername(),username );
+		assertEquals(foundInDB.getUsername(), username);
 		assertEquals(foundInDB.getPassword(), password);
+
+	}
+
+	@Test(expected = UsernameNotFoundException.class)
+	public void testLoginWrongUsername() {
+
+		// Strings entered
+		String username = "hella";
+		String password = "pass";
+
+		// Entered credentials user
+		dummyUser.setUsername("hella");
+		dummyUser.setPassword("pass");
+
+		// Mocking findByUsername() dao method. Returning a new user. No such user in DB
+		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(new User());
+
+		us.login(username, password);
+
+	}
+
+	@Test(expected = WrongPasswordException.class)
+	public void testLoginWrongPassword() {
+
+		// Strings entered
+		String username = "Mike";
+		String password = "1234";
+
+		// In DB user
+		User foundInDB = new User();
+		foundInDB.setUsername("Mike");
+		foundInDB.setPassword("pass");
+
+		// Entered credentials user
+		dummyUser.setUsername("Mike");
+		dummyUser.setPassword("1234");
+
+		// Mocking findByUsername() dao method. Returning a user found in DB
+		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(foundInDB);
+
+		us.login(username, password);
 		
+
 	}
 }
