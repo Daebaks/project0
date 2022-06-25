@@ -76,20 +76,34 @@ public class UserServiceTests {
 		// Mocking findByUsername() dao method returning a user in the DB
 		User returnedUsername = new User();
 		returnedUsername.setUsername("mike");
-		
+
 		dummyUser.setUsername("Mike"); // entered username is taken
 		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(returnedUsername);
 		us.register(dummyUser);
 	}
 
 	@Test(expected = NewUserRegistrationFailedException.class)
-	public void testRegisterInitialIdNotEqualZero() {
+	public void testRegisterInitialIdNotEqualsZero() {
 
 		// Mocking findByUsername() dao method. Given username is clear to register
 		// i.e. username isn't taken
 		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(new User());
 		dummyUser.setId(1);
-		us.register(dummyUser);		
+		us.register(dummyUser);
+	}
+
+	@Test(expected = NewUserRegistrationFailedException.class)
+	public void testRegisterReturnedIdMinusOneAndNotEqualsNewUserId() {
+
+		// Mocking findByUsername() dao method. Given username is clear to register
+		// i.e. username isn't taken
+		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(new User());
+
+		// Mocking inser() dao method. Returning -1
+		when(mockDao.insert(dummyUser)).thenReturn(-1);
+		
+		us.register(dummyUser);
+
 	}
 
 }
