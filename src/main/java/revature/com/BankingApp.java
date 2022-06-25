@@ -3,6 +3,7 @@ package revature.com;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import revature.com.exceptions.AccountNotActiveException;
 import revature.com.exceptions.InsufficientBalanceException;
 import revature.com.exceptions.InvalidAmountOfMoneyException;
 import revature.com.exceptions.NoAccountsExistException;
@@ -124,7 +125,10 @@ public class BankingApp {
 														System.out.println(e.getMessage());
 													}catch (InsufficientBalanceException e) {
 														System.out.println(e.getMessage());
-													}catch (InputMismatchException e) {
+													}catch (AccountNotActiveException e) {
+														System.out.println(e.getMessage());
+													}
+													catch (InputMismatchException e) {
 														System.out.println("Invalid input. Please try again \n");
 														scan.nextLine();
 													}
@@ -145,7 +149,10 @@ public class BankingApp {
 														System.out.println(e.getMessage());
 													}catch (InvalidAmountOfMoneyException e) {
 														System.out.println(e.getMessage());
-													}catch (InputMismatchException e) {
+													}catch (AccountNotActiveException e) {
+														System.out.println(e.getMessage());
+													}
+													catch (InputMismatchException e) {
 														System.out.println("Invalid input. Please try again \n");
 														scan.nextLine();
 													}
@@ -171,7 +178,10 @@ public class BankingApp {
 														System.out.println(e.getMessage());
 													}catch (InsufficientBalanceException e) {
 														System.out.println(e.getMessage());
-													}catch (InputMismatchException e) {
+													}catch (AccountNotActiveException e) {
+														System.out.println(e.getMessage());
+													}
+													catch (InputMismatchException e) {
 														System.out.println("Invalid input. Please try again \n");
 														scan.nextLine();
 													}
@@ -201,6 +211,7 @@ public class BankingApp {
 										break;
 									case Employee:
 
+										
 										break;
 									case Admin:
 
