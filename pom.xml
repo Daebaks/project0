@@ -35,10 +35,19 @@
 			<version>1.2.17</version>
 		</dependency>
 
+<!-- jcabi for log4j coloring -->
 <dependency>
   <groupId>com.jcabi</groupId>
   <artifactId>jcabi-log</artifactId>
   <version>0.17.1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>4.5.1</version>
+    <scope>test</scope>
 </dependency>
 
 	</dependencies>
