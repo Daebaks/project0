@@ -24,6 +24,28 @@ public class AccountService {
 	Logger logger = Logger.getLogger(AccountService.class);
 	
 
+	public void viewAllActiveAccounts() {
+		List<Account> accList = adao.findAll();
+		if (accList.isEmpty()) {
+			throw new NoAccountsExistException("No accounts found!");
+		}
+		for (Account a : accList) {
+			if(a.isActive()) {
+			System.out.println(a);}
+		}
+	}
+	
+	public void viewAllDisabledAccounts() {
+		List<Account> accList = adao.findAll();
+		if (accList.isEmpty()) {
+			throw new NoAccountsExistException("No accounts found!");
+		}
+		for (Account a : accList) {
+			if(!a.isActive()) {
+			System.out.println(a);}
+		}
+	}
+	
 	public void viewAllAccounts() {
 		
 		logger.info("Fetching accounts...");

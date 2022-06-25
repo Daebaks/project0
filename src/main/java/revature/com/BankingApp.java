@@ -21,7 +21,8 @@ public class BankingApp {
 
 	public static void main(String[] args) {
 		
-		
+//		AccountService test = new AccountService();
+//		test.viewAllDisabledAccounts();
 		run();
 
 	}
