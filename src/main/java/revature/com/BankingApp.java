@@ -143,6 +143,8 @@ public class BankingApp {
 													} catch (NoAccountsExistException e) {
 														System.out.println(e.getMessage());
 													}catch (InvalidAmountOfMoneyException e) {
+														System.out.println(e.getMessage());
+													}catch (InputMismatchException e) {
 														System.out.println("Invalid input. Please try again \n");
 														scan.nextLine();
 													}
@@ -152,9 +154,27 @@ public class BankingApp {
 													//Transfer between accounts
 													try {
 														
-													} catch (Exception e) {
 														
+														System.out.println("Please enter account id to transfer from");
+														int accIdFrom = scan.nextInt();
+														System.out.println("Please enter account id to transfer to");
+														int accIdTo = scan.nextInt();
+														System.out.println("Please enter amount of money you'd like to transfer");
+														double amount = scan.nextDouble();
+														as.transfer(amount, accIdFrom, accIdTo,  loggedInUser.getId() );
+														System.out.println("The amount of "+amount+" was successfully transferred");
+														
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													}catch (InvalidAmountOfMoneyException e) {
+														System.out.println(e.getMessage());
+													}catch (InsufficientBalanceException e) {
+														System.out.println(e.getMessage());
+													}catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
 													}
+													
 													
 												}else if  (customerEntry==5) {
 													System.out.println("Thank you. See you again\n");

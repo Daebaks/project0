@@ -1,6 +1,5 @@
 package revature.com.service;
 
-import java.util.Iterator;
 import java.util.List;
 
 import revature.com.dao.AccountDao;
@@ -10,7 +9,6 @@ import revature.com.dao.UserDaoInterface;
 import revature.com.exceptions.InsufficientBalanceException;
 import revature.com.exceptions.InvalidAmountOfMoneyException;
 import revature.com.exceptions.NoAccountsExistException;
-import revature.com.exceptions.UsernameNotFoundException;
 import revature.com.models.Account;
 import revature.com.models.User;
 
@@ -95,4 +93,32 @@ public class AccountService {
 
 	}
 
+	public void transfer(double amount, int accFrom, int accTo, int custId) {
+		
+		Account aFrom = adao.findById(accFrom);
+		Account aTo = adao.findById(accTo);
+
+		User u = udao.findById(custId);
+		if (u != null) {
+			if (u.getId() != aFrom.getUsers_a_id() || u.getId() != aTo.getUsers_a_id()) {
+				throw new NoAccountsExistException("No such account(s) with with the provided id(s)"); // this is for the user's Account list only not all accounts in the bank
+			}
+		}
+		if (amount <= 0) {
+			throw new InvalidAmountOfMoneyException("Amount to transfer must be greater than 0 $");
+		}
+		if (amount > aFrom.getBalance()) {
+			throw new InsufficientBalanceException("Sorry, insufficient funds in your account");
+		}
+		
+		// If all of the above pass, then balances in both accounts will be updated.
+				//TRANSFER FROM
+				double newBalanceFrom = aFrom.getBalance() - amount;
+				adao.updateBalanceById(newBalanceFrom, accFrom);
+				//TO
+				double newBalanceTo = aTo.getBalance() + amount;
+				adao.updateBalanceById(newBalanceTo, accTo);
+		
+	}
+	
 }
