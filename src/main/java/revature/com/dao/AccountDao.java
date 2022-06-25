@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import revature.com.models.Account;
+import revature.com.models.Role;
 import revature.com.utility.ConnectionUtility;
 
 public class AccountDao implements AccountDaoInterface {
@@ -32,7 +33,7 @@ public class AccountDao implements AccountDaoInterface {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Unable to create user! SQL - exception!");
+			System.out.println("Unable to create account! SQL - exception!");
 			e.printStackTrace();
 		}
 		return -1;
@@ -133,6 +134,29 @@ public class AccountDao implements AccountDaoInterface {
 			System.out.println("SQL failure inside AccountDao updateBalanceById()");
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public boolean getStatusById(int id) {
+		
+		boolean status = false;
+		try (Connection conn = ConnectionUtility.getConnection();) {
+
+			String sql = "SELECT active FROM accounts WHERE id=?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, id);
+			ResultSet rs = st.executeQuery();
+
+			if (rs.next()) {
+				status = rs.getBoolean("active");
+			}
+
+		} catch (SQLException e) {
+			System.out.println("SQL failure - unable to get status");
+			e.printStackTrace();
+		}
+		
+		return status;
 	}
 	
 	@Override

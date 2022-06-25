@@ -14,6 +14,7 @@ public interface UserDaoInterface {
 	User findByUsername(String username);	   //Returns user by 
 	List<User> findAll();                                    //Returns a list of all users available
 	
+	
 	//Update
 	boolean update(User u);								//Update a user. Returns true/false 
 	

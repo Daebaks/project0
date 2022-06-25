@@ -13,7 +13,7 @@ public interface AccountDaoInterface {
 	List<Account> findAll();
 	Account findById(int id);
 	List<Account> findByOwner(int accHolderId);
-	
+	boolean getStatusById(int id); //gets active/inactive
 	
 	//Updating
 	boolean update(Account a);
