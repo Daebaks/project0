@@ -103,7 +103,6 @@ public class UserDao implements UserDaoInterface {
 			System.out.println("SQL failure in findByUsername UserDao");
 			e.printStackTrace();
 		}
-
 		return u;
 	}
 

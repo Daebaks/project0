@@ -10,15 +10,15 @@ import revature.com.models.User;
 
 public class UserService {
 
-	private UserDaoInterface udao = new UserDao();
+	public UserDaoInterface udao = new UserDao();
 
 	public User register(User u) {
 
-		System.out.println("Loading...\n");
+		System.out.println("Registering the new user...\n");
 
 		//Validate username if it's taken before registering
-		User uEntered = udao.findByUsername(u.getUsername());
-		if(uEntered.getUsername()!=null) {
+		User userRetrievedAttempt = udao.findByUsername(u.getUsername());
+		if(userRetrievedAttempt.getUsername()!=null && userRetrievedAttempt.getUsername().equals(u.getUsername())) {
 			throw new UsernameAlreadyExistsException("Username "+u.getUsername()+" is taken. Please choose a different username");
 		}
 		
