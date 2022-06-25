@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankingApp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">project0</a> &gt; <a href="index.source.html" class="el_package">revature.com</a> &gt; <span class="el_source">BankingApp.java</span></div><h1>BankingApp.java</h1><pre class="source lang-java linenums">package revature.com;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import revature.com.exceptions.InsufficientBalanceException;
+import revature.com.exceptions.InvalidAmountOfMoneyException;
+import revature.com.exceptions.NoAccountsExistException;
+import revature.com.exceptions.UsernameAlreadyExistsException;
+import revature.com.exceptions.UsernameNotFoundException;
+import revature.com.exceptions.WrongPasswordException;
+import revature.com.models.Role;
+import revature.com.models.User;
+import revature.com.service.AccountService;
+import revature.com.service.UserService;
+
+<span class="nc" id="L17">public class BankingApp {</span>
+
+<span class="nc" id="L19">	private static Scanner scan = new Scanner(System.in);</span>
+
+	public static void main(String[] args) {
+		
+		
+<span class="nc" id="L24">		run();</span>
+
+<span class="nc" id="L26">	}</span>
+
+	public static void run() {
+
+<span class="nc" id="L30">		System.out.println(&quot;Welcome to the Bank \n&quot;);</span>
+
+<span class="nc" id="L32">		UserService us = new UserService();</span>
+<span class="nc" id="L33">		AccountService as = new AccountService();</span>
+
+		
+		
+<span class="nc" id="L37">		boolean mainRunning = true; // Keeping the main loop to run the program until user quits</span>
+
+<span class="nc bnc" id="L39" title="All 2 branches missed.">		while (mainRunning) {</span>
+
+			try {
+				/*
+				 * Main menu
+				 */
+<span class="nc" id="L45">				System.out.println(&quot;==Main Menu== \n\n&quot;</span>
+						+ &quot;Please press 1 to register if you are a new customer \n&quot;
+						+ &quot;Please press 2 to log-in if you are a current customer \n&quot;
+						+ &quot;Please press 3 to exit the Bank&quot;);
+<span class="nc" id="L49">				int mainEntry = scan.nextInt();</span>
+
+				/*
+				 * Logging-in menu
+				 */
+<span class="nc bnc" id="L54" title="All 2 branches missed.">				if (mainEntry == 2) {</span>
+
+					// Logging-in for an existing user
+<span class="nc" id="L57">					boolean loggedInRunning = true;</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">					while (loggedInRunning) {</span>
+<span class="nc" id="L59">						System.out.println(&quot;==Logging-in Menu== \n\n&quot;</span>
+								+ &quot;Please press 1 to enter your credentials \n&quot;
+								+ &quot;Please press 2 to go back to the main menu \n&quot;);
+								
+						
+						try {
+							
+<span class="nc" id="L66">							int loggedEntry = scan.nextInt();</span>
+							
+<span class="nc bnc" id="L68" title="All 2 branches missed.">							if(loggedEntry==1) {</span>
+								//logging-in
+								try {
+<span class="nc" id="L71">									System.out.println(&quot;Enter username&quot;);</span>
+<span class="nc" id="L72">									String username = scan.next();</span>
+
+<span class="nc" id="L74">									System.out.println(&quot;Enter password&quot;);</span>
+<span class="nc" id="L75">									String password = scan.next();</span>
+
+
+<span class="nc" id="L78">									User loggedInUser = us.login(username, password);</span>
+
+<span class="nc" id="L80">									Role role = loggedInUser.getRole();</span>
+									// Handle roles here and then create each role's menu/portal
+<span class="nc bnc" id="L82" title="All 4 branches missed.">									switch (role) {</span>
+									/*
+									 * Customer menu
+									 */
+									case Customer:
+<span class="nc" id="L87">										boolean cutomerLoggedIn=true;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">										while(cutomerLoggedIn) {</span>
+<span class="nc" id="L89">											System.out.println(&quot;==Customer Menu== \n\n&quot;</span>
+<span class="nc" id="L90">													+ &quot;Welcome: &quot;+loggedInUser.getUsername()</span>
+<span class="nc" id="L91">													+ &quot;\n\nPlease press 1 to view your account(s) \n&quot;</span>
+<span class="nc" id="L92">													+ &quot;Please press 2 to withdraw from your account \n&quot;</span>
+<span class="nc" id="L93">													+ &quot;Please press 3 to deposit to your account \n&quot;</span>
+<span class="nc" id="L94">													+ &quot;Please press 4 transfer between your accounts \n&quot;</span>
+<span class="nc" id="L95">													+ &quot;Please press 5 to go back to the previous menu \n&quot;);</span>
+											
+											try {
+												
+<span class="nc" id="L99">												int customerEntry = scan.nextInt();</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">												if(customerEntry==1) {</span>
+													//Print account owned by the customer
+<span class="nc" id="L102">													System.out.println(&quot;======Your Account(s)======&quot;);</span>
+													try {
+<span class="nc" id="L104">														as.viewOwnerAccListById(loggedInUser.getId());</span>
+<span class="nc" id="L105">													} catch (NoAccountsExistException e) {</span>
+<span class="nc" id="L106">														System.out.println(e.getMessage());</span>
+													}
+<span class="nc" id="L108">													System.out.println(&quot;===========================\n&quot;);</span>
+													
+<span class="nc bnc" id="L110" title="All 2 branches missed.">												} else if(customerEntry==2) {</span>
+													//Withdraw from account
+													try {
+														
+<span class="nc" id="L114">														System.out.println(&quot;Please select account id to withdraw from&quot;);</span>
+<span class="nc" id="L115">														int withdrawAccId = scan.nextInt();</span>
+<span class="nc" id="L116">														System.out.println(&quot;Please specify the amount of money to withdraw&quot;);</span>
+<span class="nc" id="L117">														double withdrawAmount = scan.nextDouble();</span>
+<span class="nc" id="L118">														double newBalance = as.withdraw(withdrawAmount, withdrawAccId, loggedInUser.getId() );</span>
+<span class="nc" id="L119">														System.out.println(&quot;Withdraw was successful. New balance is: &quot;+newBalance+&quot;\n&quot;);</span>
+														
+<span class="nc" id="L121">													} catch (NoAccountsExistException e) {</span>
+<span class="nc" id="L122">														System.out.println(e.getMessage());</span>
+<span class="nc" id="L123">													}catch (InvalidAmountOfMoneyException e) {</span>
+<span class="nc" id="L124">														System.out.println(e.getMessage());</span>
+<span class="nc" id="L125">													}catch (InsufficientBalanceException e) {</span>
+<span class="nc" id="L126">														System.out.println(e.getMessage());</span>
+<span class="nc" id="L127">													}catch (InputMismatchException e) {</span>
+<span class="nc" id="L128">														System.out.println(&quot;Invalid input. Please try again \n&quot;);</span>
+<span class="nc" id="L129">														scan.nextLine();</span>
+													}
+													
+													
+<span class="nc bnc" id="L133" title="All 2 branches missed.">												} else if  (customerEntry==3) {</span>
+													//Deposit to an account
+													try {
+														
+<span class="nc" id="L137">														System.out.println(&quot;Please select account id to deposit to&quot;);</span>
+<span class="nc" id="L138">														int depositAccId = scan.nextInt();</span>
+<span class="nc" id="L139">														System.out.println(&quot;Please specify the amount of money for deposit&quot;);</span>
+<span class="nc" id="L140">														double depositAmount = scan.nextDouble();</span>
+<span class="nc" id="L141">														double newBalance = as.deposit(depositAmount, depositAccId, loggedInUser.getId() );</span>
+<span class="nc" id="L142">														System.out.println(&quot;deposit was successful. New balance is: &quot;+newBalance+&quot;\n&quot;);</span>
+														
+<span class="nc" id="L144">													} catch (NoAccountsExistException e) {</span>
+<span class="nc" id="L145">														System.out.println(e.getMessage());</span>
+<span class="nc" id="L146">													}catch (InvalidAmountOfMoneyException e) {</span>
+<span class="nc" id="L147">														System.out.println(e.getMessage());</span>
+<span class="nc" id="L148">													}catch (InputMismatchException e) {</span>
+<span class="nc" id="L149">														System.out.println(&quot;Invalid input. Please try again \n&quot;);</span>
+<span class="nc" id="L150">														scan.nextLine();</span>
+													}
+													
+													
+<span class="nc bnc" id="L154" title="All 2 branches missed.">												}else if  (customerEntry==4) {</span>
+													//Transfer between accounts
+													try {
+														
+														
+<span class="nc" id="L159">														System.out.println(&quot;Please enter account id to transfer from&quot;);</span>
+<span class="nc" id="L160">														int accIdFrom = scan.nextInt();</span>
+<span class="nc" id="L161">														System.out.println(&quot;Please enter account id to transfer to&quot;);</span>
+<span class="nc" id="L162">														int accIdTo = scan.nextInt();</span>
+<span class="nc" id="L163">														System.out.println(&quot;Please enter amount of money you'd like to transfer&quot;);</span>
+<span class="nc" id="L164">														double amount = scan.nextDouble();</span>
+<span class="nc" id="L165">														as.transfer(amount, accIdFrom, accIdTo,  loggedInUser.getId() );</span>
+<span class="nc" id="L166">														System.out.println(&quot;The amount of &quot;+amount+&quot; was successfully transferred&quot;);</span>
+														
+<span class="nc" id="L168">													} catch (NoAccountsExistException e) {</span>
+<span class="nc" id="L169">														System.out.println(e.getMessage());</span>
+<span class="nc" id="L170">													}catch (InvalidAmountOfMoneyException e) {</span>
+<span class="nc" id="L171">														System.out.println(e.getMessage());</span>
+<span class="nc" id="L172">													}catch (InsufficientBalanceException e) {</span>
+<span class="nc" id="L173">														System.out.println(e.getMessage());</span>
+<span class="nc" id="L174">													}catch (InputMismatchException e) {</span>
+<span class="nc" id="L175">														System.out.println(&quot;Invalid input. Please try again \n&quot;);</span>
+<span class="nc" id="L176">														scan.nextLine();</span>
+													}
+													
+													
+<span class="nc bnc" id="L180" title="All 2 branches missed.">												}else if  (customerEntry==5) {</span>
+<span class="nc" id="L181">													System.out.println(&quot;Thank you. See you again\n&quot;);</span>
+<span class="nc" id="L182">													cutomerLoggedIn = false;</span>
+<span class="nc" id="L183">												} else {</span>
+<span class="nc" id="L184">													System.out.println(&quot;Invalid input. Please try again\n&quot;);</span>
+												}
+												
+												
+<span class="nc" id="L188">											} catch (InputMismatchException e) {</span>
+<span class="nc" id="L189">												System.out.println(&quot;Invalid input. Please try again\n&quot;);</span>
+<span class="nc" id="L190">												scan.nextLine();</span>
+											} 
+											
+											
+											
+											
+											
+											
+										}
+										
+										
+<span class="nc" id="L201">										break;</span>
+									case Employee:
+
+<span class="nc" id="L204">										break;</span>
+									case Admin:
+
+<span class="nc" id="L207">										break;</span>
+									default:
+										break;
+									}
+									
+
+<span class="nc" id="L213">								} catch (UsernameNotFoundException e) {</span>
+<span class="nc" id="L214">									System.out.println(e.getMessage());</span>
+									
+<span class="nc" id="L216">								} catch (WrongPasswordException e) {</span>
+<span class="nc" id="L217">									System.out.println(e.getMessage());</span>
+								}
+
+								
+								
+								
+<span class="nc bnc" id="L223" title="All 2 branches missed.">							}else if(loggedEntry==2) {</span>
+<span class="nc" id="L224">								loggedInRunning = false;</span>
+<span class="nc" id="L225">							}  else {</span>
+<span class="nc" id="L226">								System.out.println(&quot;Invalid input. Please try again\n&quot;);</span>
+							}
+							
+<span class="nc" id="L229">						} catch (InputMismatchException e) {</span>
+<span class="nc" id="L230">							System.out.println(&quot;Invalid input. Please try again\n&quot;);</span>
+<span class="nc" id="L231">							scan.nextLine();</span>
+						} 
+					 
+						
+						
+						
+						
+						
+						
+						
+					}
+
+<span class="nc" id="L243">				}</span>
+
+				/*
+				 * New user registration menu
+				 */
+<span class="nc bnc" id="L248" title="All 2 branches missed.">				else if (mainEntry == 1) {</span>
+
+					// Registration for a new customer
+<span class="nc" id="L251">					boolean registrationRunning = true;</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">					while (registrationRunning) {</span>
+
+						try {
+<span class="nc" id="L255">							System.out.println(&quot;Enter username&quot;);</span>
+<span class="nc" id="L256">							String username = scan.next();</span>
+
+<span class="nc" id="L258">							System.out.println(&quot;Enter password&quot;);</span>
+<span class="nc" id="L259">							String password = scan.next();</span>
+
+<span class="nc" id="L261">							User u = new User(username, password, Role.Customer, null);</span>
+<span class="nc" id="L262">							us.register(u);</span>
+<span class="nc" id="L263">							System.out.println(&quot;Welcome new customer. Use your username: &quot; + username + &quot; to log-in\n&quot;);</span>
+<span class="nc" id="L264">							registrationRunning = false; // New user registered</span>
+<span class="nc" id="L265">						} catch (UsernameAlreadyExistsException e) {</span>
+<span class="nc" id="L266">							System.out.println(e.getMessage());</span>
+						}
+
+					}
+
+<span class="nc bnc" id="L271" title="All 2 branches missed.">				} else if (mainEntry == 3) {</span>
+
+<span class="nc" id="L273">					mainRunning = false; // To quit the program</span>
+<span class="nc" id="L274">					System.out.println(&quot;\nThank you for using the Bank&quot;);</span>
+<span class="nc" id="L275">				} else {</span>
+
+<span class="nc" id="L277">					System.out.println(&quot;invalid input. Please try again \n&quot;);</span>
+				}
+<span class="nc" id="L279">			} catch (InputMismatchException e) {</span>
+
+<span class="nc" id="L281">				System.out.println(&quot;invalid input. Please try again \n&quot;);</span>
+			} finally {
+
+<span class="nc" id="L284">				scan.nextLine();</span>
+			}
+
+		}
+
+
+
+<span class="nc" id="L291">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

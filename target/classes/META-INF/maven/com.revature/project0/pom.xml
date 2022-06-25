@@ -35,32 +35,52 @@
 			<version>1.2.17</version>
 		</dependency>
 
-<!-- jcabi for log4j coloring -->
-<dependency>
-  <groupId>com.jcabi</groupId>
-  <artifactId>jcabi-log</artifactId>
-  <version>0.17.1</version>
-</dependency>
+		<!-- jcabi for log4j coloring -->
+		<dependency>
+			<groupId>com.jcabi</groupId>
+			<artifactId>jcabi-log</artifactId>
+			<version>0.17.1</version>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-<dependency>
-    <groupId>org.mockito</groupId>
-    <artifactId>mockito-core</artifactId>
-    <version>4.5.1</version>
-    <scope>test</scope>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>4.5.1</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
-<!-- Surefire plugin to print the tests during build cycle -->
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M7</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+	<build>
+		<plugins>
+			<!-- Surefire plugin to print the tests during build cycle -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M7</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.6</version>
+				<!-- Adding execution steps to use Jacoco -->
+				<executions>
+					<execution>
+						<!-- First execution: to prepare Jacoco runtime agent -->
+						<id>prepare-agent</id>
+						<goals>
+							<goal>	prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test	</phase>
+						<goals>
+							<goal>	report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
