@@ -46,12 +46,12 @@ public class UserServiceTests {
 	}
 	
 	//Testings
+	//===============Testing register() method in UserService==============
 	@Test
 	public void testSuccessfulRigisterUserReturnsNewPKId() {
 		
 		//I am using two DAOs methods inside register()
 		//So, I need to mock both DAOs method
-		
 		dummyUser = new User(0, "Hila", "pass",Role.Admin, new LinkedList<Account>());
 		
 		//Mocking findByUsername() dao method. Given username is clear to register
@@ -66,8 +66,9 @@ public class UserServiceTests {
 		//Finally, registering the user
 		User registeredUser = us.register(dummyUser);
 		assertEquals(registeredUser.getId(), fakePK);
-		
 	}
+	
+	
 	
 	
 	

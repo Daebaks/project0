@@ -18,7 +18,7 @@ public class UserService {
 
 		//Validate username if it's taken before registering
 		User userRetrievedAttempt = udao.findByUsername(u.getUsername());
-		if(userRetrievedAttempt.getUsername()!=null && userRetrievedAttempt.getUsername().equals(u.getUsername())) {
+		if(userRetrievedAttempt.getUsername()!=null && userRetrievedAttempt.getUsername().equalsIgnoreCase(u.getUsername())) {
 			throw new UsernameAlreadyExistsException("Username "+u.getUsername()+" is taken. Please choose a different username");
 		}
 		

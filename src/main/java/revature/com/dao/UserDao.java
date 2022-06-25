@@ -85,9 +85,9 @@ public class UserDao implements UserDaoInterface {
 
 		try (Connection conn = ConnectionUtility.getConnection();) {
 
-			String sql = "SELECT *  FROM users WHERE username = ?";
+			String sql = "SELECT *  FROM users WHERE lower(username) = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, username);
+			st.setString(1, username.toLowerCase());
 			ResultSet rs = st.executeQuery();
 
 			if (rs.next()) {
