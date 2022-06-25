@@ -2,6 +2,8 @@ package revature.com.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import revature.com.dao.AccountDao;
 import revature.com.dao.AccountDaoInterface;
 import revature.com.dao.UserDao;
@@ -16,8 +18,15 @@ public class AccountService {
 
 	private AccountDaoInterface adao = new AccountDao();
 	private UserDaoInterface udao = new UserDao();
+	
+	//Log4j
+	Logger logger = Logger.getLogger(AccountService.class);
+	
 
 	public void viewAllAccounts() {
+		
+		logger.info("Fetching accounts...");
+		
 		List<Account> accList = adao.findAll();
 		if (accList.isEmpty()) {
 			throw new NoAccountsExistException("No accounts found!");
