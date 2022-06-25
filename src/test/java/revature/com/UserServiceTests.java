@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import revature.com.dao.UserDao;
+import revature.com.exceptions.UsernameAlreadyExistsException;
 import revature.com.models.Account;
 import revature.com.models.Role;
 import revature.com.models.User;
@@ -22,54 +23,62 @@ public class UserServiceTests {
 	private UserService us;
 	private UserDao mockDao;
 	private User dummyUser;
-	
-	//Setting up the tests
+
+	// Setting up the tests
 	@Before
 	public void setup() {
-		
+
 		us = new UserService();
 		mockDao = mock(UserDao.class);
-		
+
 		us.udao = mockDao;
-		
+
 		dummyUser = new User();
 		dummyUser.setAccounts(new LinkedList<Account>());
 		dummyUser.setId(0);
 	}
-	
-	//Tearing down
+
+	// Tearing down
 	@After
 	public void tearDown() {
 		us = null;
 		dummyUser = null;
 		mockDao = null;
 	}
-	
-	//Testings
-	//===============Testing register() method in UserService==============
+
+	// Testings
+	// ===============Testing register() method in UserService==============
 	@Test
 	public void testSuccessfulRigisterUserReturnsNewPKId() {
-		
-		//I am using two DAOs methods inside register()
-		//So, I need to mock both DAOs method
-		dummyUser = new User(0, "Hila", "pass",Role.Admin, new LinkedList<Account>());
-		
-		//Mocking findByUsername() dao method. Given username is clear to register
-		//i.e. username isn't taken
+
+		// I am using two DAOs methods inside register()
+		// So, I need to mock both DAOs method
+		dummyUser = new User(0, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+
+		// Mocking findByUsername() dao method. Given username is clear to register
+		// i.e. username isn't taken
 		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(new User());
-		
-		//Mocking inser() dao method
+
+		// Mocking inser() dao method
 		Random r = new Random();
 		int fakePK = r.nextInt(100);
-		when(mockDao.insert(dummyUser)).thenReturn(fakePK); 
-		
-		//Finally, registering the user
+		when(mockDao.insert(dummyUser)).thenReturn(fakePK);
+
+		// Finally, registering the user
 		User registeredUser = us.register(dummyUser);
 		assertEquals(registeredUser.getId(), fakePK);
 	}
-	
-	
-	
-	
+
+	@Test(expected = UsernameAlreadyExistsException.class)
+	public void testEnteredUsernameAlreadyExistsInDB() {
+
+		// Mocking findByUsername() dao method returning a user in the DB
+		User takenUsername = new User();
+		takenUsername.setUsername("mike");
+		dummyUser.setUsername("Mike"); //entered username is taken
+		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(takenUsername);
+		us.register(dummyUser);
+	}
+
 	
 }
