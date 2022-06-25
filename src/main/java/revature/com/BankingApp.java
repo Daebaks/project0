@@ -114,8 +114,6 @@ public class BankingApp {
 														int withdrawAccId = scan.nextInt();
 														System.out.println("Please specify the amount of money to withdraw");
 														double withdrawAmount = scan.nextDouble();
-														
-														
 														double newBalance = as.withdraw(withdrawAmount, withdrawAccId, loggedInUser.getId() );
 														System.out.println("Withdraw was successful. New balance is: "+newBalance+"\n");
 														
@@ -133,6 +131,22 @@ public class BankingApp {
 													
 												} else if  (customerEntry==3) {
 													//Deposit to an account
+													try {
+														
+														System.out.println("Please select account id to deposit to");
+														int depositAccId = scan.nextInt();
+														System.out.println("Please specify the amount of money for deposit");
+														double depositAmount = scan.nextDouble();
+														double newBalance = as.deposit(depositAmount, depositAccId, loggedInUser.getId() );
+														System.out.println("deposit was successful. New balance is: "+newBalance+"\n");
+														
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													}catch (InvalidAmountOfMoneyException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													
 													
 												}else if  (customerEntry==4) {
 													//Transfer between accounts
