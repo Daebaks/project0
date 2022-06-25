@@ -150,6 +150,11 @@ public class BankingApp {
 													
 												}else if  (customerEntry==4) {
 													//Transfer between accounts
+													try {
+														
+													} catch (Exception e) {
+														
+													}
 													
 												}else if  (customerEntry==5) {
 													System.out.println("Thank you. See you again\n");
@@ -260,8 +265,7 @@ public class BankingApp {
 
 		}
 
-//		AccountService as = new AccountService();
-//		as.viewAllAccounts();
+
 
 	}
 }
