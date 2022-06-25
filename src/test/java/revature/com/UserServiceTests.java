@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import revature.com.dao.UserDao;
+import revature.com.exceptions.NewUserRegistrationFailedException;
 import revature.com.exceptions.UsernameAlreadyExistsException;
 import revature.com.models.Account;
 import revature.com.models.Role;
@@ -73,12 +74,22 @@ public class UserServiceTests {
 	public void testEnteredUsernameAlreadyExistsInDB() {
 
 		// Mocking findByUsername() dao method returning a user in the DB
-		User takenUsername = new User();
-		takenUsername.setUsername("mike");
-		dummyUser.setUsername("Mike"); //entered username is taken
-		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(takenUsername);
+		User returnedUsername = new User();
+		returnedUsername.setUsername("mike");
+		
+		dummyUser.setUsername("Mike"); // entered username is taken
+		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(returnedUsername);
 		us.register(dummyUser);
 	}
 
-	
+	@Test(expected = NewUserRegistrationFailedException.class)
+	public void testRegisterInitialIdNotEqualZero() {
+
+		// Mocking findByUsername() dao method. Given username is clear to register
+		// i.e. username isn't taken
+		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(new User());
+		dummyUser.setId(1);
+		us.register(dummyUser);		
+	}
+
 }
