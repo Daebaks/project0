@@ -87,6 +87,7 @@ public class UserServiceTests {
 	@Test(expected = NewUserRegistrationFailedException.class)
 	public void testRegisterInitialIdNotEqualsZero() {
 
+		dummyUser = new User(0, "Hila", "pass", Role.Admin, new LinkedList<Account>());
 		// Mocking findByUsername() dao method. Given username is clear to register
 		// i.e. username isn't taken
 		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(new User());
@@ -97,6 +98,7 @@ public class UserServiceTests {
 	@Test(expected = NewUserRegistrationFailedException.class)
 	public void testRegisterReturnedIdMinusOneAndNotEqualsNewUserId() {
 
+		dummyUser = new User(0, "Hila", "pass", Role.Admin, new LinkedList<Account>());
 		// Mocking findByUsername() dao method. Given username is clear to register
 		// i.e. username isn't taken
 		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(new User());
