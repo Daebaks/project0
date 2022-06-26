@@ -233,7 +233,8 @@ public class BankingApp {
 
 													try {
 
-														System.out.println("Please enter customer id to display personal info");
+														System.out.println(
+																"Please enter customer id to display personal info");
 														int custId = scan.nextInt();
 														System.out.println("==============Customer=============");
 														us.viewById(custId);
@@ -248,7 +249,8 @@ public class BankingApp {
 												} else if (employeeEntry == 3) {
 													try {
 
-														System.out.println("Please enter customer username to display personal info");
+														System.out.println(
+																"Please enter customer username to display personal info");
 														String custUN = scan.next();
 														System.out.println("==============Customer=============");
 														us.viewByUsername(custUN);
@@ -278,7 +280,8 @@ public class BankingApp {
 												} else if (employeeEntry == 5) {
 													try {
 
-														System.out.println("==============Active Accounts=============");
+														System.out
+																.println("==============Active Accounts=============");
 														as.viewAllActiveAccounts();
 														System.out.println("========================================");
 													} catch (NoAccountsExistException e) {
@@ -302,12 +305,13 @@ public class BankingApp {
 														System.out.println("Invalid input. Please try again \n");
 														scan.nextLine();
 													}
-													
+
 												} else if (employeeEntry == 7) {
 
 													try {
 
-														System.out.println("Please enter account ID to activate/approve");
+														System.out
+																.println("Please enter account ID to activate/approve");
 														int accId = scan.nextInt();
 														System.out.println("=================================");
 														as.approveAcById(accId);
@@ -318,23 +322,26 @@ public class BankingApp {
 														System.out.println("Invalid input. Please try again \n");
 														scan.nextLine();
 													}
-													
+
 												} else if (employeeEntry == 8) {
 
 													try {
 
-														System.out.println("Please enter customer id to display customer's accounts list");
+														System.out.println(
+																"Please enter customer id to display customer's accounts list");
 														int custId = scan.nextInt();
-														System.out.println("==============Customer's Accounts=============");
+														System.out.println(
+																"==============Customer's Accounts=============");
 														as.viewOwnerAccListById(custId);
-														System.out.println("===========================================");
+														System.out
+																.println("===========================================");
 													} catch (NoAccountsExistException e) {
 														System.out.println(e.getMessage());
 													} catch (InputMismatchException e) {
 														System.out.println("Invalid input. Please try again \n");
 														scan.nextLine();
 													}
-													
+
 												} else if (employeeEntry == 9) {
 													System.out.println("Thank you. See you again\n");
 													employeeLoggedIn = false;
@@ -351,10 +358,62 @@ public class BankingApp {
 										}
 
 										break;
-									case Admin:
 
-										
-										
+									/*
+									 * Admin menu
+									 */
+									case Admin:
+										boolean adminLoggedIn = true;
+										while (adminLoggedIn) {
+											System.out.println("==Admin Menu== \n\n" + "Welcome: "
+													+ loggedInUser.getUsername() + " You can do the following:"
+													+ "\n\n1=>[print all accounts details]             2=>[print all customers info]            3=>[approve accounts by ID]  \n"
+													+ "4=>[deny accounts by ID]                    5=>[update username by user's ID]        6=>[update password by user's ID] \n"
+													+ "7=>[update account balance by account's ID] 8=>[transfer money (any accounts by ID)] \n"
+													+ "9=>[remove user by ID]                      10=>[remove account by ID]               11=>[go back to the previous menu] \n");
+
+											try {
+
+												int adminEntry = scan.nextInt();
+												if (adminEntry == 1) {
+
+												} else if (adminEntry == 2) {
+
+												} else if (adminEntry == 3) {
+
+												} else if (adminEntry == 4) {
+
+												} else if (adminEntry == 5) {
+
+												} else if (adminEntry == 6) {
+
+												} else if (adminEntry == 7) {
+
+												} 
+												else if (adminEntry == 8) {
+
+												} 
+												else if (adminEntry == 9) {
+
+												} 
+												else if (adminEntry == 10) {
+
+												} 
+												else if (adminEntry == 11) {
+													System.out.println("Thank you. See you again\n");
+													adminLoggedIn = false;
+												} else {
+													System.out.println("Invalid input. Please try again\n");
+													scan.nextLine();
+												}
+
+											} catch (InputMismatchException e) {
+												System.out.println("Invalid input. Please try again\n");
+												scan.nextLine();
+											}
+
+										}
+
 										break;
 									default:
 										break;

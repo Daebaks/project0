@@ -209,7 +209,7 @@ public class AccountService {
 		
 		adao.updateBalanceById(newBalance, id);
 		
-		System.out.println("Successfullu updated the balance");
+		System.out.println("Successfully updated the balance");
 		
 		
 	}
