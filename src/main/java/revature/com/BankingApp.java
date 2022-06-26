@@ -208,8 +208,59 @@ public class BankingApp {
 										
 										
 										break;
+										
+										/*
+										 * Employee menu
+										 * */
 									case Employee:
+										boolean employeeLoggedIn=true;
+										while(employeeLoggedIn) {
+											System.out.println("==Employee Menu== \n\n"
+													+ "Welcome: "+loggedInUser.getUsername()+" You can do the following:"
+													+ "\n\n1=>[print an account by ID]           2=>[print a customer by ID]                  3=>[print a customer by username]  \n"
+													+ "4=>[print pending/inActive accounts]  5=>[print approved/active accounts]          6=>[deny account by ID] \n"
+													+ "7=>[approve account by ID]            8=>[print customer accounts by customer ID] \n"
+													+ "9=>[go back to the previous menu] \n");
+													
+											try {
+												
+												int employeeEntry = scan.nextInt();
+												if (employeeEntry==1) {
+													
+												} else if(employeeEntry==2) {
 
+												}else if(employeeEntry==3) {
+
+												}else if(employeeEntry==4) {
+
+												}else if(employeeEntry==5) {
+
+												}else if(employeeEntry==6) {
+
+												}else if(employeeEntry==7) {
+
+												}else if (employeeEntry==8) {
+
+												}else if(employeeEntry==9) {
+													System.out.println("Thank you. See you again\n");
+													employeeLoggedIn = false;
+												}else  {
+													System.out.println("Invalid input. Please try again\n");
+													scan.nextLine();
+												}
+												
+												
+												
+												
+												
+												
+											} catch (InputMismatchException e) {
+												System.out.println("Invalid input. Please try again\n");
+												scan.nextLine();
+											} 
+											
+											
+										}
 										
 										
 										break;
