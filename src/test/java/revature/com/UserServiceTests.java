@@ -227,15 +227,49 @@ public class UserServiceTests {
 		User dummyUser1 = new User(1, "Hila", "pass", Role.Admin, new LinkedList<Account>());
 		User dummyUser2 = new User(2, "Jacobe", "pass", Role.Employee, new LinkedList<Account>());
 		User dummyUser3 = new User(3, "Mike", "pass", Role.Customer, new LinkedList<Account>());
-		
 		users.add(dummyUser1);
 		users.add(dummyUser2);
 		users.add(dummyUser3);
-		
 		when(mockDao.findAll()).thenReturn(users);
 		us.viewAllUsers();
+	}
+	// ===========================================================
+
+	// ===============Testing removeUser()====================
+	@Test(expected = UsernameNotFoundException.class)
+	public void testRemoveUserByIDNotFound() {
 		
+		User dummyUser = new User(1, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		when(mockDao.findById(1)).thenReturn(new User());
+		us.removeUser(1);
+	}
+	// ===========================================================
+
+	// ===============Testing changeUsername()====================
+	@Test(expected = UsernameNotFoundException.class)
+	public void testChangeUsernameUserNotFoundNotFound() {
 		
+		User dummyUser = new User(1, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		when(mockDao.findById(11)).thenReturn(new User());
+		us.changeUsername(11, "new_username");
+	}
+	
+	@Test(expected = UsernameAlreadyExistsException.class)
+	public void testChangeUsernameNewUsernameTaken() {
+		
+		User dummyUser = new User(1, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		when(mockDao.findById(1)).thenReturn(dummyUser);
+		
+		us.changeUsername(1, "Hila");
+	}
+	// ===========================================================
+
+	// ===============Testing changePassword()====================
+	@Test(expected = UsernameNotFoundException.class)
+	public void testChangePasswordUserNotFoundNotFound() {
+		User dummyUser = new User(1, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		when(mockDao.findById(11)).thenReturn(new User());
+		us.changePassword(11, "new_password");
 	}
 	
 	
