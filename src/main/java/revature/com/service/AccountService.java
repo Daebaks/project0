@@ -17,8 +17,8 @@ import revature.com.models.User;
 
 public class AccountService {
 
-	private AccountDaoInterface adao = new AccountDao();
-	private UserDaoInterface udao = new UserDao();
+	public AccountDaoInterface adao = new AccountDao();
+//	private UserDaoInterface udao = new UserDao();
 
 	// Log4j
 	Logger logger = Logger.getLogger(AccountService.class);
@@ -103,17 +103,19 @@ public class AccountService {
 
 		Account a = adao.findById(id);
 
-		// Get the user ID to match it
-		User u = udao.findById(custId);
-
-		if (u != null) {
-			if (u.getId() != a.getUsers_a_id()) {
+		if(a.getId()==0) {
+			throw new NoAccountsExistException("Account doesn't exist with this id");
+		}else
+		// Verify ownership of the account
+		
+			if (!adao.findByOwner(custId).contains(a)) {
 				throw new NoAccountsExistException("No such accounts with this id = " + id); // this is for the user's
 																								// Account list only not
 																								// all accounts in the
 																								// bank
 			}
-		}
+		
+		
 		if (adao.getStatusById(id) == false) {
 			throw new AccountNotActiveException("your account(s) are inactive. Call an admin/employee");
 		}
@@ -138,17 +140,17 @@ public class AccountService {
 
 		Account a = adao.findById(id);
 
-		// Get the user ID to match it
-		User u = udao.findById(custId);
-
-		if (u != null) {
-			if (u.getId() != a.getUsers_a_id()) {
-				throw new NoAccountsExistException("No such accounts with this id = " + id); // this is for the user's
-																								// Account list only not
-																								// all accounts in the
-																								// bank
-			}
-		}
+		if(a.getId()==0) {
+			throw new NoAccountsExistException("Account doesn't exist with this id");
+		}else
+		// Verify ownership of the account
+					if (!adao.findByOwner(custId).contains(a)) {
+						throw new NoAccountsExistException("No such accounts with this id = " + id); // this is for the user's
+																										// Account list only not
+																										// all accounts in the
+																										// bank
+					}
+				 
 		if (adao.getStatusById(id) == false) {
 			throw new AccountNotActiveException("your account(s) are inactive. Call an admin/employee");
 		}
@@ -193,17 +195,17 @@ public class AccountService {
 		Account aFrom = adao.findById(accFrom);
 		Account aTo = adao.findById(accTo);
 
-		User u = udao.findById(custId);
-		if (u != null) {
-			if (u.getId() != aFrom.getUsers_a_id() || u.getId() != aTo.getUsers_a_id()) {
-				throw new NoAccountsExistException("No such account(s) with with the provided id(s)"); // this is for
-																										// the user's
-																										// Account list
-																										// only not all
-																										// accounts in
-																										// the bank
-			}
-		}
+		if(aFrom.getId()==0 || aTo.getId()==0) {
+			throw new NoAccountsExistException("Account doesn't exist with this id");
+		}else
+		// Verify ownership of the accounts
+					if (!adao.findByOwner(custId).contains(aFrom) || !adao.findByOwner(custId).contains(aTo)) {
+						throw new NoAccountsExistException("No such accounts with the provided ids "); // this is for the user's
+																										// Account list only not
+																										// all accounts in the
+																										// bank
+					}
+				 
 		if (adao.getStatusById(accFrom) == false || adao.getStatusById(accTo) == false) {
 			throw new AccountNotActiveException("your account(s) are inactive. Call an admin/employee");
 		}
