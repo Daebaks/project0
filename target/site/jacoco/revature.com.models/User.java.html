@@ -36,7 +36,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 <span class="nc" id="L38">		return &quot;User [id=&quot; + id + &quot;, username=&quot; + username + &quot;, password=&quot; + password + &quot;, role=&quot; + role + &quot;, accounts=&quot;</span>
-<span class="nc" id="L39">				+ accounts + &quot;]&quot;;</span>
+				+ accounts + &quot;]&quot;;
 	}
 
 	@Override
@@ -53,8 +53,8 @@ public class User implements Serializable {
 <span class="nc bnc" id="L53" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
 <span class="nc" id="L54">			return false;</span>
 <span class="nc" id="L55">		User other = (User) obj;</span>
-<span class="nc bnc" id="L56" title="All 6 branches missed.">		return Objects.equals(accounts, other.accounts) &amp;&amp; id == other.id &amp;&amp; Objects.equals(password, other.password)</span>
-<span class="nc bnc" id="L57" title="All 4 branches missed.">				&amp;&amp; role == other.role &amp;&amp; Objects.equals(username, other.username);</span>
+<span class="nc bnc" id="L56" title="All 8 branches missed.">		return Objects.equals(accounts, other.accounts) &amp;&amp; id == other.id &amp;&amp; Objects.equals(password, other.password)</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">				&amp;&amp; role == other.role &amp;&amp; Objects.equals(username, other.username);</span>
 	}
 
 	public int getId() {

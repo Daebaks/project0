@@ -19,7 +19,7 @@ public interface UserDaoInterface {
 	boolean update(User u);								//Update a user. Returns true/false 
 	
 	//Delete
-	boolean delete(int id);									//Deletes a user that has the given id
+	void deleteById(int id);
 	
 	
 	

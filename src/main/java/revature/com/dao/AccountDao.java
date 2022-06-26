@@ -164,15 +164,30 @@ public class AccountDao implements AccountDaoInterface {
 			st.setInt(2, id);
 			st.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQL failure inside AccountDao updateBalanceById()");
+			System.out.println("SQL failure inside AccountDao alterActivityById()");
 			e.printStackTrace();
 		}
 	}
 
-	@Override
-	public boolean delete(Account a) {
-		// TODO Auto-generated method stub
-		return false;
+	public void deleteById(int id) {
+		
+		try (Connection conn = ConnectionUtility.getConnection();) {
+
+			//To delete an account I need to remove a row from both junctionTable and accounts table
+			String sql_accounts = "DELETE FROM accounts WHERE id=?";
+			PreparedStatement st_accounts = conn.prepareStatement(sql_accounts);
+			st_accounts.setInt(1, id);
+			st_accounts.executeUpdate();
+			String sql_junction = "DELETE FROM users_accounts_j WHERE accounts_j_id=?";
+			PreparedStatement st_junction = conn.prepareStatement(sql_junction);
+			st_junction.setInt(1, id);
+			st_junction.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL failure inside AccountDao alterActivityById()");
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

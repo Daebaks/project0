@@ -16,61 +16,71 @@ import revature.com.models.User;
 
 <span class="fc" id="L17">		System.out.println(&quot;Registering the new user...\n&quot;);</span>
 
-		//Validate username if it's taken before registering
+		// Validate username if it's taken before registering
 <span class="fc" id="L20">		User userRetrievedAttempt = udao.findByUsername(u.getUsername());</span>
-<span class="pc bpc" id="L21" title="1 of 4 branches missed.">		if(userRetrievedAttempt.getUsername()!=null &amp;&amp; userRetrievedAttempt.getUsername().equalsIgnoreCase(u.getUsername())) {</span>
-<span class="fc" id="L22">			throw new UsernameAlreadyExistsException(&quot;Username &quot;+u.getUsername()+&quot; is taken. Please choose a different username&quot;);</span>
-		}
-		
-<span class="fc bfc" id="L25" title="All 2 branches covered.">		if (u.getId() != 0) {</span>
-<span class="fc" id="L26">			throw new NewUserRegistrationFailedException(&quot;Invalid user registration because id was not zero!&quot;);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">		if (userRetrievedAttempt.getUsername() != null</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">				&amp;&amp; userRetrievedAttempt.getUsername().equalsIgnoreCase(u.getUsername())) {</span>
+<span class="fc" id="L23">			throw new UsernameAlreadyExistsException(</span>
+<span class="fc" id="L24">					&quot;Username &quot; + u.getUsername() + &quot; is taken. Please choose a different username&quot;);</span>
 		}
 
-<span class="fc" id="L29">		int generatedId = udao.insert(u); // Creating new user and returning user's id</span>
-
-<span class="pc bpc" id="L31" title="1 of 4 branches missed.">		if (generatedId != -1 &amp;&amp; generatedId != u.getId()) {</span>
-<span class="fc" id="L32">			u.setId(generatedId);</span>
-<span class="fc" id="L33">		} else {</span>
-<span class="fc" id="L34">			throw new NewUserRegistrationFailedException(</span>
-<span class="fc" id="L35">					&quot;Invalid user id. Id was -1 or did not change after insertion into the DB&quot;);</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">		if (u.getId() != 0) {</span>
+<span class="fc" id="L28">			throw new NewUserRegistrationFailedException(&quot;Invalid user registration because id was not zero!&quot;);</span>
 		}
 
-<span class="fc" id="L38">		System.out.println(&quot;Registration was successful and user id is &quot; + u.getId());</span>
+<span class="fc" id="L31">		int generatedId = udao.insert(u); // Creating new user and returning user's id</span>
 
-<span class="fc" id="L40">		return u;</span>
+<span class="pc bpc" id="L33" title="1 of 4 branches missed.">		if (generatedId != -1 &amp;&amp; generatedId != u.getId()) {</span>
+<span class="fc" id="L34">			u.setId(generatedId);</span>
+		} else {
+<span class="fc" id="L36">			throw new NewUserRegistrationFailedException(</span>
+					&quot;Invalid user id. Id was -1 or did not change after insertion into the DB&quot;);
+		}
+
+<span class="fc" id="L40">		System.out.println(&quot;Registration was successful and user id is &quot; + u.getId());</span>
+
+<span class="fc" id="L42">		return u;</span>
 
 	}
 
-	public User getByUsername() {
+	public void viewByUsername(String username) {
 
-<span class="nc" id="L46">		return null;</span>
+<span class="nc" id="L48">		User u = udao.findByUsername(username);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		if (u.getUsername() == null) {</span>
+<span class="nc" id="L50">			throw new UsernameNotFoundException(&quot;User doesn't exist&quot;);</span>
+		}
+<span class="nc" id="L52">		System.out.println(u);</span>
 
-	}
+<span class="nc" id="L54">	}</span>
+
+	public void viewById(int id) {
+<span class="nc" id="L57">		User u = udao.findById(id);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">		if (u.getUsername() == null) {</span>
+<span class="nc" id="L59">			throw new UsernameNotFoundException(&quot;User doesn't exist&quot;);</span>
+		}
+<span class="nc" id="L61">		System.out.println(u);</span>
+
+<span class="nc" id="L63">	}</span>
 
 	public User login(String username, String password) {
 
-<span class="fc" id="L52">		User u = udao.findByUsername(username);</span>
+<span class="fc" id="L67">		User u = udao.findByUsername(username);</span>
 
-<span class="fc" id="L54">		System.out.println(&quot;Loading...\n&quot;);</span>
-		
-<span class="fc bfc" id="L56" title="All 2 branches covered.">		if (u.getUsername() == null) {</span>
-<span class="fc" id="L57">			throw new UsernameNotFoundException(&quot;Username &quot; + username + &quot; does not exist in the DB. Try again&quot;);</span>
+<span class="fc" id="L69">		System.out.println(&quot;Loading...\n&quot;);</span>
+
+<span class="fc bfc" id="L71" title="All 2 branches covered.">		if (u.getUsername() == null) {</span>
+<span class="fc" id="L72">			throw new UsernameNotFoundException(&quot;Username &quot; + username + &quot; does not exist in the DB. Try again&quot;);</span>
 		}
 
-<span class="fc bfc" id="L60" title="All 2 branches covered.">		if (!(u.getPassword().equals(password))) {</span>
-<span class="fc" id="L61">			throw new WrongPasswordException(&quot;Password doesn't match our records. Please try again&quot;);	</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		if (!(u.getPassword().equals(password))) {</span>
+<span class="fc" id="L76">			throw new WrongPasswordException(&quot;Password doesn't match our records. Please try again&quot;);</span>
 		}
 
-<span class="fc" id="L64">		System.out.println(&quot;Successful log in\n&quot;);</span>
-		
-<span class="fc" id="L66">		return u;</span>
+<span class="fc" id="L79">		System.out.println(&quot;Successful log in\n&quot;);</span>
+
+<span class="fc" id="L81">		return u;</span>
 
 	}
-	
-	
-	
-	
-	
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -201,4 +201,31 @@ public class AccountService {
 
 	}
 
+	public void editBalance(int id, double newBalance) {
+		Account a = adao.findById(id);
+		if(a.getId()==0) {
+			throw new NoAccountsExistException("Account doesn't exist with this id");
+		}
+		
+		adao.updateBalanceById(newBalance, id);
+		
+		System.out.println("Successfullu updated the balance");
+		
+		
+	}
+	
+	
+	public void removeAcc(int id) {
+		Account a = adao.findById(id);
+		if(a.getId()==0) {
+			throw new NoAccountsExistException("Account doesn't exist with this id");
+		}
+		
+		adao.deleteById(id);
+		System.out.println("Account with the id: "+id+" was removed successfully");
+		
+	}
+	
+	
+	
 }

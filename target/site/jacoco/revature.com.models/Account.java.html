@@ -94,8 +94,8 @@ public class Account implements Serializable {
 <span class="nc bnc" id="L94" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
 <span class="nc" id="L95">			return false;</span>
 <span class="nc" id="L96">		Account other = (Account) obj;</span>
-<span class="nc bnc" id="L97" title="All 4 branches missed.">		return active == other.active &amp;&amp; Double.doubleToLongBits(balance) == Double.doubleToLongBits(other.balance)</span>
-<span class="nc bnc" id="L98" title="All 4 branches missed.">				&amp;&amp; id == other.id &amp;&amp; users_a_id == other.users_a_id;</span>
+<span class="nc bnc" id="L97" title="All 8 branches missed.">		return active == other.active &amp;&amp; Double.doubleToLongBits(balance) == Double.doubleToLongBits(other.balance)</span>
+				&amp;&amp; id == other.id &amp;&amp; users_a_id == other.users_a_id;
 	}
 
 	

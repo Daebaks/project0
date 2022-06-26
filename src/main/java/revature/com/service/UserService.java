@@ -82,4 +82,22 @@ public class UserService {
 
 	}
 
+	public void removeUser(int id) {
+		User u = udao.findById(id);
+		if (u.getUsername() == null) {
+			throw new UsernameNotFoundException("User doesn't exist");
+		}
+		
+		udao.deleteById(id);
+		System.out.println("successfully removed user and all associated accounts");
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

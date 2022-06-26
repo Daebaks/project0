@@ -106,6 +106,31 @@ public class UserDao implements UserDaoInterface {
 		return u;
 	}
 
+	public void deleteById(int id) {
+		
+		try (Connection conn = ConnectionUtility.getConnection();) {
+
+			//To delete a user, all three tables need to be updated
+			String sql_accounts = "DELETE FROM accounts WHERE users_a_id=?";
+			PreparedStatement st_accounts = conn.prepareStatement(sql_accounts);
+			st_accounts.setInt(1, id);
+			st_accounts.executeUpdate();
+			String sql_junction = "DELETE FROM users_accounts_j WHERE users_j_id=?";
+			PreparedStatement st_junction = conn.prepareStatement(sql_junction);
+			st_junction.setInt(1, id);
+			st_junction.executeUpdate();
+			String sql_users = "DELETE FROM users WHERE id=?";
+			PreparedStatement st_users = conn.prepareStatement(sql_users);
+			st_users.setInt(1, id);
+			st_users.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL failure inside AccountDao alterActivityById()");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	@Override
 	public List<User> findAll() {
 
@@ -149,10 +174,6 @@ public class UserDao implements UserDaoInterface {
 		return false;
 	}
 
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }

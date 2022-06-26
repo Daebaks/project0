@@ -15,5 +15,6 @@ C:\Users\Nothing\Desktop\SpringToolsWorkSpace\project0\src\main\java\revature\co
 C:\Users\Nothing\Desktop\SpringToolsWorkSpace\project0\src\main\java\revature\com\dao\AccountDaoInterface.java
 C:\Users\Nothing\Desktop\SpringToolsWorkSpace\project0\src\main\java\revature\com\utility\ConnectionUtility.java
 C:\Users\Nothing\Desktop\SpringToolsWorkSpace\project0\src\main\java\revature\com\dao\UserDao.java
+C:\Users\Nothing\Desktop\SpringToolsWorkSpace\project0\src\main\java\revature\com\exceptions\AccountNotActiveException.java
 C:\Users\Nothing\Desktop\SpringToolsWorkSpace\project0\src\main\java\revature\com\service\UserService.java
 C:\Users\Nothing\Desktop\SpringToolsWorkSpace\project0\src\main\java\revature\com\exceptions\WrongPasswordException.java
