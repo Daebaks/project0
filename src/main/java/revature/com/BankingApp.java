@@ -221,7 +221,7 @@ public class BankingApp {
 														int accId = scan.nextInt();
 														System.out.println("==============Account=============");
 														as.viewAccById(accId);
-														System.out.println("=================================");
+														System.out.println("===================================");
 													} catch (NoAccountsExistException e) {
 														System.out.println(e.getMessage());
 													} catch (InputMismatchException e) {
@@ -233,11 +233,11 @@ public class BankingApp {
 
 													try {
 
-														System.out.println("Please enter customer id to display");
+														System.out.println("Please enter customer id to display personal info");
 														int custId = scan.nextInt();
 														System.out.println("==============Customer=============");
 														us.viewById(custId);
-														System.out.println("=================================");
+														System.out.println("===================================");
 													} catch (UsernameNotFoundException e) {
 														System.out.println(e.getMessage());
 													} catch (InputMismatchException e) {
@@ -248,11 +248,11 @@ public class BankingApp {
 												} else if (employeeEntry == 3) {
 													try {
 
-														System.out.println("Please enter customer username to display");
+														System.out.println("Please enter customer username to display personal info");
 														String custUN = scan.next();
 														System.out.println("==============Customer=============");
 														us.viewByUsername(custUN);
-														System.out.println("=================================");
+														System.out.println("===================================");
 													} catch (UsernameNotFoundException e) {
 														System.out.println(e.getMessage());
 													} catch (InputMismatchException e) {
@@ -267,7 +267,7 @@ public class BankingApp {
 														System.out.println(
 																"==============Inactive Accounts=============");
 														as.viewAllDisabledAccounts();
-														System.out.println("======================================");
+														System.out.println("=======================================");
 													} catch (NoAccountsExistException e) {
 														System.out.println(e.getMessage());
 													} catch (InputMismatchException e) {
@@ -280,7 +280,7 @@ public class BankingApp {
 
 														System.out.println("==============Active Accounts=============");
 														as.viewAllActiveAccounts();
-														System.out.println("======================================");
+														System.out.println("========================================");
 													} catch (NoAccountsExistException e) {
 														System.out.println(e.getMessage());
 													} catch (InputMismatchException e) {
@@ -327,7 +327,7 @@ public class BankingApp {
 														int custId = scan.nextInt();
 														System.out.println("==============Customer's Accounts=============");
 														as.viewOwnerAccListById(custId);
-														System.out.println("=================================");
+														System.out.println("===========================================");
 													} catch (NoAccountsExistException e) {
 														System.out.println(e.getMessage());
 													} catch (InputMismatchException e) {

@@ -1,11 +1,18 @@
 package revature.com.service;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import revature.com.dao.AccountDao;
+import revature.com.dao.AccountDaoInterface;
 import revature.com.dao.UserDao;
 import revature.com.dao.UserDaoInterface;
 import revature.com.exceptions.NewUserRegistrationFailedException;
 import revature.com.exceptions.UsernameAlreadyExistsException;
 import revature.com.exceptions.UsernameNotFoundException;
 import revature.com.exceptions.WrongPasswordException;
+import revature.com.models.Account;
 import revature.com.models.User;
 
 public class UserService {
@@ -58,6 +65,7 @@ public class UserService {
 		if (u.getUsername() == null) {
 			throw new UsernameNotFoundException("User doesn't exist");
 		}
+		
 		System.out.println(u);
 
 	}

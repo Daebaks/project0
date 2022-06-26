@@ -67,6 +67,7 @@ public class UserDao implements UserDaoInterface {
 				u.setUsername(rs.getString("username"));
 				u.setPassword(rs.getString("pwd"));
 				u.setRole(Role.valueOf(rs.getString("user_role")));
+				
 
 			}
 
