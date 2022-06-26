@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.After;
@@ -50,7 +51,7 @@ public class UserServiceTests {
 	}
 
 	// Testings
-	// ===============Testing register() method in UserService===================
+	// ===============Testing register()===================
 	@Test
 	public void testSuccessfulRigisterUserReturnsNewPKId() {
 
@@ -110,7 +111,7 @@ public class UserServiceTests {
 	}
 	// ===========================================================
 
-	// ===============Testing login() method in UserService====================
+	// ===============Testing login()====================
 	@Test
 	public void testLoginSuccessfulLogin() {
 
@@ -174,7 +175,68 @@ public class UserServiceTests {
 		when(mockDao.findByUsername(dummyUser.getUsername())).thenReturn(foundInDB);
 
 		us.login(username, password);
-		
+		}
 
+	// ===========================================================
+
+	// ===============Testing viewByUsername()====================
+	
+	@Test(expected = UsernameNotFoundException.class)
+	public void testViewByUsernameNoUserFound() {
+		dummyUser = new User(0, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		when(mockDao.findByUsername("Hillla")).thenReturn(new User());
+		
+		us.viewByUsername("Hillla");
 	}
+	
+	@Test
+	public void testViewByUsernameReturningCorrectFoundUser() {
+		dummyUser = new User(0, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		
+		when(mockDao.findByUsername("Hila")).thenReturn(dummyUser);
+		
+		us.viewByUsername("Hila");
+		
+	}
+	// ===========================================================
+
+	// ===============Testing viewById()====================
+	@Test(expected = UsernameNotFoundException.class)
+	public void testViewByIdNoUserFound() {
+		dummyUser = new User(1, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		when(mockDao.findById(100)).thenReturn(new User());
+		
+		us.viewById(100);
+	}
+	
+	@Test
+	public void testViewByIdReturningCorrectFoundUser() {
+		dummyUser = new User(1, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		
+		when(mockDao.findById(1)).thenReturn(dummyUser);
+		
+		us.viewById(1);
+		
+	}
+	// ===========================================================
+
+	// ===============Testing viewBAllUsers()====================
+	@Test
+	public void testViewAllUsersReturnAllUsers() {
+		List<User> users = new LinkedList<User>();
+		User dummyUser1 = new User(1, "Hila", "pass", Role.Admin, new LinkedList<Account>());
+		User dummyUser2 = new User(2, "Jacobe", "pass", Role.Employee, new LinkedList<Account>());
+		User dummyUser3 = new User(3, "Mike", "pass", Role.Customer, new LinkedList<Account>());
+		
+		users.add(dummyUser1);
+		users.add(dummyUser2);
+		users.add(dummyUser3);
+		
+		when(mockDao.findAll()).thenReturn(users);
+		us.viewAllUsers();
+		
+		
+	}
+	
+	
 }
