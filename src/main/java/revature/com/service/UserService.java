@@ -16,12 +16,14 @@ public class UserService {
 
 		System.out.println("Registering the new user...\n");
 
-		//Validate username if it's taken before registering
+		// Validate username if it's taken before registering
 		User userRetrievedAttempt = udao.findByUsername(u.getUsername());
-		if(userRetrievedAttempt.getUsername()!=null && userRetrievedAttempt.getUsername().equalsIgnoreCase(u.getUsername())) {
-			throw new UsernameAlreadyExistsException("Username "+u.getUsername()+" is taken. Please choose a different username");
+		if (userRetrievedAttempt.getUsername() != null
+				&& userRetrievedAttempt.getUsername().equalsIgnoreCase(u.getUsername())) {
+			throw new UsernameAlreadyExistsException(
+					"Username " + u.getUsername() + " is taken. Please choose a different username");
 		}
-		
+
 		if (u.getId() != 0) {
 			throw new NewUserRegistrationFailedException("Invalid user registration because id was not zero!");
 		}
@@ -41,9 +43,22 @@ public class UserService {
 
 	}
 
-	public User getByUsername() {
+	public void viewByUsername(String username) {
 
-		return null;
+		User u = udao.findByUsername(username);
+		if (u.getUsername() == null) {
+			throw new UsernameNotFoundException("User doesn't exist");
+		}
+		System.out.println(u);
+
+	}
+
+	public void viewById(int id) {
+		User u = udao.findById(id);
+		if (u.getUsername() == null) {
+			throw new UsernameNotFoundException("User doesn't exist");
+		}
+		System.out.println(u);
 
 	}
 
@@ -52,24 +67,19 @@ public class UserService {
 		User u = udao.findByUsername(username);
 
 		System.out.println("Loading...\n");
-		
+
 		if (u.getUsername() == null) {
 			throw new UsernameNotFoundException("Username " + username + " does not exist in the DB. Try again");
 		}
 
 		if (!(u.getPassword().equals(password))) {
-			throw new WrongPasswordException("Password doesn't match our records. Please try again");	
+			throw new WrongPasswordException("Password doesn't match our records. Please try again");
 		}
 
 		System.out.println("Successful log in\n");
-		
+
 		return u;
 
 	}
-	
-	
-	
-	
-	
 
 }
