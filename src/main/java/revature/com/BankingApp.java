@@ -388,31 +388,102 @@ public class BankingApp {
 
 												int adminEntry = scan.nextInt();
 												if (adminEntry == 1) {
+													
+													try {
 
+														System.out.println(
+																"================All Accounts==============");
+																as.viewAllAccounts();
+														System.out.println("===========================================");
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													} 
+													
 												} else if (adminEntry == 2) {
 
+													System.out.println(
+															"================All Users info==============");
+															us.viewAllUsers();
+													System.out.println("===========================================");
+													
 												} else if (adminEntry == 3) {
 
+													try {
+
+														System.out
+																.println("Please enter account ID to activate/approve");
+														int accId = scan.nextInt();
+														System.out.println("=================================");
+														as.approveAcById(accId);
+														System.out.println("=================================");
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													} catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													
 												} else if (adminEntry == 4) {
 
+													try {
+
+														System.out.println("Please enter account ID to disable/deny");
+														int accId = scan.nextInt();
+														System.out.println("=================================");
+														as.denyAcById(accId);
+														System.out.println("=================================");
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													} catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+																										
 												} else if (adminEntry == 5) {
-
+													//update username by id
 												} else if (adminEntry == 6) {
-
+													//update pass by id
 												} else if (adminEntry == 7) {
 
+													try {
+
+														System.out.println("Please enter account ID to edit balance");
+														int accId = scan.nextInt();
+														System.out.println("Please enter new balance");
+														double newBalance = scan.nextDouble();
+														as.editBalance(accId, newBalance);
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													} catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													
 												} 
 												else if (adminEntry == 8) {
-
+													//transfer
 												} 
 												else if (adminEntry == 9) {
-
+													//remove user
 												} 
 												else if (adminEntry == 10) {
-
+													//remove account
 												} 
 												else if (adminEntry == 11) {
-
+													
+													try {
+														System.out.println("Please enter user ID to view accounts owned");
+														int accId = scan.nextInt();
+														System.out.println("======User Account(s) with ID = "+accId+"======");
+														as.viewOwnerAccListById(accId);
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													}catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													System.out.println("=======================================\n");
+													
 												} else if (adminEntry == 12) {
 													System.out.println("Thank you. See you again\n");
 													adminLoggedIn = false;

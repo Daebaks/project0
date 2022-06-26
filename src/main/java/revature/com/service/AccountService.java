@@ -65,7 +65,7 @@ public class AccountService {
 	public void viewOwnerAccListById(int userId) {
 		List<Account> accList = adao.findByOwner(userId);
 		if (accList.isEmpty()) {
-			throw new NoAccountsExistException("No accounts found!");
+			throw new NoAccountsExistException("No accounts found! or user doesn't exist!");
 		}
 		for (Account a : accList) {
 			System.out.println(a);

@@ -70,6 +70,18 @@ public class UserService {
 
 	}
 
+	
+	public void viewAllUsers() {
+		
+		if(!udao.findAll().isEmpty()) {
+			for(User u: udao.findAll()) {
+				System.out.println(u);
+			}
+		}else {
+			System.out.println("No accounts exist in the bank");
+		}
+	}
+	
 	public User login(String username, String password) {
 
 		User u = udao.findByUsername(username);

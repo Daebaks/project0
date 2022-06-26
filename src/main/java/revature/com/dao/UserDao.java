@@ -67,7 +67,6 @@ public class UserDao implements UserDaoInterface {
 				u.setUsername(rs.getString("username"));
 				u.setPassword(rs.getString("pwd"));
 				u.setRole(Role.valueOf(rs.getString("user_role")));
-				
 
 			}
 
@@ -108,10 +107,10 @@ public class UserDao implements UserDaoInterface {
 	}
 
 	public void deleteById(int id) {
-		
+
 		try (Connection conn = ConnectionUtility.getConnection();) {
 
-			//To delete a user, all three tables need to be updated
+			// To delete a user, all three tables need to be updated
 			String sql_accounts = "DELETE FROM accounts WHERE users_a_id=?";
 			PreparedStatement st_accounts = conn.prepareStatement(sql_accounts);
 			st_accounts.setInt(1, id);
@@ -128,45 +127,42 @@ public class UserDao implements UserDaoInterface {
 			System.out.println("SQL failure inside AccountDao alterActivityById()");
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 	@Override
 	public List<User> findAll() {
 
-//		List<User> usersList = new LinkedList<User>();
-//
-//		try (Connection conn = ConnectionUtility.getConnection()) {
-//
-//			Statement st = conn.createStatement();
-//
-//			String sql = "SELECT * FROM users INNER JOIN accounts ON users.id=accounts.users_a_id";
-//			
-//			ResultSet rs = st.executeQuery(sql);
-//			
-//			while(rs.next()) {
-//				
-//				int id = rs.getInt("id");
-//				String username = rs.getString("username");
-//				String password = rs.getString("pwd");
-//				String userRole = rs.getString("user_role");
-//				List<Account> userAccounts = rs
-//				
-//				User u = new User
-//
-//				
-//			}
-//			
-//			
-//
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		return usersList;
-		return null;
+		List<User> usersList = new LinkedList<User>();
+
+		try (Connection conn = ConnectionUtility.getConnection()) {
+
+			Statement st = conn.createStatement();
+			String sql = "SELECT * FROM users";
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+
+				int id = rs.getInt("id");
+				String username = rs.getString("username");
+				String password = rs.getString("pwd");
+				Role role = Role.valueOf(rs.getString("user_role"));
+				
+				User u = new User();
+				u.setId(id);
+				u.setUsername(username);
+				u.setPassword(password);
+				u.setRole(role);
+				
+				usersList.add(u);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("SQL failure in userDAO");
+			e.printStackTrace();
+		}
+
+		return usersList;
 	}
 
 	@Override
@@ -174,7 +170,5 @@ public class UserDao implements UserDaoInterface {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	
 
 }
