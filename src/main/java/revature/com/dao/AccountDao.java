@@ -18,24 +18,24 @@ public class AccountDao implements AccountDaoInterface {
 
 	@Override
 	public int open(Account a, int userID) {
-		Connection conn = ConnectionUtility.getConnection();
-
-		String sql = "INSERT INTO accounts  (users_a_id) VALUES (?) RETURNING accounts.id";
-
-		try {
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setInt(1, userID);
-			ResultSet rs;
-			if (!(rs = st.executeQuery()).equals(null)) {
-				rs.next();
-				int id = rs.getInt(1);
-				return id;
-			}
-
-		} catch (SQLException e) {
-			System.out.println("Unable to create account! SQL - exception!");
-			e.printStackTrace();
-		}
+//		Connection conn = ConnectionUtility.getConnection();
+//
+//		String sql = "INSERT INTO accounts  (users_a_id) VALUES (?) RETURNING accounts.id";
+//
+//		try {
+//			PreparedStatement st = conn.prepareStatement(sql);
+//			st.setInt(1, userID);
+//			ResultSet rs;
+//			if (!(rs = st.executeQuery()).equals(null)) {
+//				rs.next();
+//				int id = rs.getInt(1);
+//				return id;
+//			}
+//
+//		} catch (SQLException e) {
+//			System.out.println("Unable to create account! SQL - exception!");
+//			e.printStackTrace();
+//		}
 		return -1;
 	}
 

@@ -165,6 +165,29 @@ public class AccountService {
 
 	}
 
+	//Admins can transfer money from any 2 accounts regardless ownership and status of the accounts
+	public void transferAdmin(double amount, int accFrom, int accTo) {
+		Account aFrom = adao.findById(accFrom);
+		Account aTo = adao.findById(accTo);
+		
+		if(aFrom.getId()==0 || aTo.getId()==0) {
+			throw new NoAccountsExistException("Account doesn't exist with this id");
+		}
+		if (amount <= 0) {
+			throw new InvalidAmountOfMoneyException("Amount to transfer must be greater than 0 $");
+		}
+		if (amount > aFrom.getBalance()) {
+			throw new InsufficientBalanceException("Sorry, insufficient funds in your account");
+		}
+		// TRANSFER FROM
+				double newBalanceFrom = aFrom.getBalance() - amount;
+				adao.updateBalanceById(newBalanceFrom, accFrom);
+				// TO
+				double newBalanceTo = aTo.getBalance() + amount;
+				adao.updateBalanceById(newBalanceTo, accTo);
+		
+	}
+	
 	public void transfer(double amount, int accFrom, int accTo, int custId) {
 
 		Account aFrom = adao.findById(accFrom);

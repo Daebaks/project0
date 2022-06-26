@@ -16,10 +16,11 @@ public interface UserDaoInterface {
 	
 	
 	//Update
-	boolean update(User u);								//Update a user. Returns true/false 
+	void updateUsernameById(int id, String newUsername); 			//Update a user. Returns new username 
+	void updatePassById(int id, String newPass);                        //Update password
 	
 	//Delete
-	void deleteById(int id);
+	void deleteById(int id);								//Remove's a user and all of user's associated accounts
 	
 	
 	

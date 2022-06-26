@@ -441,8 +441,40 @@ public class BankingApp {
 																										
 												} else if (adminEntry == 5) {
 													//update username by id
+													try {
+														System.out.println("Please enter user ID to change username for");
+														int uId = scan.nextInt();
+														System.out.println("Please enter new username");
+														String newName = scan.next();
+														System.out.println("==================================");
+														us.changeUsername(uId, newName);
+														
+													} catch (UsernameNotFoundException e) {
+														System.out.println(e.getMessage());
+													}catch (UsernameAlreadyExistsException e) {
+														System.out.println(e.getMessage());
+													}catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													
 												} else if (adminEntry == 6) {
 													//update pass by id
+													try {
+														System.out.println("Please enter user ID to change password for");
+														int uId = scan.nextInt();
+														System.out.println("Please enter new password");
+														String newPass = scan.next();
+														System.out.println("==================================");
+														us.changePassword(uId, newPass);
+														
+													} catch (UsernameNotFoundException e) {
+														System.out.println(e.getMessage());
+													}catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													
 												} else if (adminEntry == 7) {
 
 													try {
@@ -461,7 +493,31 @@ public class BankingApp {
 													
 												} 
 												else if (adminEntry == 8) {
-													//transfer
+													//transfer Admins regardless of accounts ownership and status
+													try {
+
+														System.out.println("Please enter account id to transfer from");
+														int accIdFrom = scan.nextInt();
+														System.out.println("Please enter account id to transfer to");
+														int accIdTo = scan.nextInt();
+														System.out.println(
+																"Please enter amount of money you'd like to transfer");
+														double amount = scan.nextDouble();
+														as.transferAdmin(amount, accIdFrom, accIdTo);
+														System.out.println("The amount of " + amount
+																+ " was successfully transferred");
+
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													} catch (InvalidAmountOfMoneyException e) {
+														System.out.println(e.getMessage());
+													} catch (InsufficientBalanceException e) {
+														System.out.println(e.getMessage());
+													} catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													
 												} 
 												else if (adminEntry == 9) {
 													//remove user by id
@@ -524,6 +580,7 @@ public class BankingApp {
 
 										break;
 									default:
+										//Unnecessary to use internally
 										break;
 									}
 

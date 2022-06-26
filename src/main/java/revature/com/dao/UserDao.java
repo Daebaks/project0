@@ -165,10 +165,43 @@ public class UserDao implements UserDaoInterface {
 		return usersList;
 	}
 
+	
 	@Override
-	public boolean update(User u) {
-		// TODO Auto-generated method stub
-		return false;
+	public void updateUsernameById(int id, String newUsername) {
+		
+		try (Connection conn = ConnectionUtility.getConnection();) {
+
+			String sql = "UPDATE users SET username = ? WHERE id = ?";
+
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, newUsername);
+			st.setInt(2, id);
+			st.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL failure inside AccountDao updateBalanceById()");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	public void updatePassById(int id, String newPass) {
+		
+		try (Connection conn = ConnectionUtility.getConnection();) {
+
+			String sql = "UPDATE users SET pwd = ? WHERE id = ?";
+
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, newPass);
+			st.setInt(2, id);
+			st.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL failure inside AccountDao updateBalanceById()");
+			e.printStackTrace();
+		}
+		
 	}
 
 }

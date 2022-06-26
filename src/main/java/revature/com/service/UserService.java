@@ -113,7 +113,27 @@ public class UserService {
 		
 	}
 	
+	public void changeUsername(int id, String newName) {
+		User u = udao.findById(id);
+		if (u.getUsername() == null) {
+			throw new UsernameNotFoundException("User doesn't exist");
+		}
+		if(u.getUsername().equalsIgnoreCase(newName)) {
+			throw new UsernameAlreadyExistsException("username is taken, try a different new name");
+		}
+		udao.updateUsernameById(id, newName);
+		System.out.println("Successfully updated username to "+newName);		
+	}
 	
+	public void changePassword(int id, String newPass) {
+		User u = udao.findById(id);
+		if (u.getUsername() == null) {
+			throw new UsernameNotFoundException("User doesn't exist");
+		}
+		
+		udao.updatePassById(id, newPass);
+		System.out.println("Successfully updated password");		
+	}
 	
 	
 	

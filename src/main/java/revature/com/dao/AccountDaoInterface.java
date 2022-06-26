@@ -17,7 +17,6 @@ public interface AccountDaoInterface {
 	
 	//Updating
 	void alterActivityById(int id,boolean active);
-	
 	void updateBalanceById(double newBalance, int id); //updates account balance by account id if possible
 	
 	//Deleting
