@@ -464,10 +464,33 @@ public class BankingApp {
 													//transfer
 												} 
 												else if (adminEntry == 9) {
-													//remove user
+													//remove user by id
+													try {
+														System.out.println("Please enter user ID to remove user with all associated accounts");
+														int uId = scan.nextInt();
+														System.out.println("==================================");
+														us.removeUser(uId);
+													} catch (UsernameNotFoundException e) {
+														System.out.println(e.getMessage());
+													}catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
 												} 
 												else if (adminEntry == 10) {
 													//remove account
+													try {
+														System.out.println("Please enter account ID to remove");
+														int accId = scan.nextInt();
+														System.out.println("==================================");
+														as.removeAcc(accId);
+													} catch (NoAccountsExistException e) {
+														System.out.println(e.getMessage());
+													}catch (InputMismatchException e) {
+														System.out.println("Invalid input. Please try again \n");
+														scan.nextLine();
+													}
+													
 												} 
 												else if (adminEntry == 11) {
 													
