@@ -80,13 +80,15 @@ public class BankingApp {
 									case Customer:
 										boolean cutomerLoggedIn = true;
 										while (cutomerLoggedIn) {
-											System.out.println(
-													"==Customer Menu== \n\n" + "Welcome: " + loggedInUser.getUsername()
-															+ "\n\nPlease press 1 to view your account(s) \n"
-															+ "Please press 2 to withdraw from your account \n"
-															+ "Please press 3 to deposit to your account \n"
-															+ "Please press 4 transfer between your accounts \n"
-															+ "Please press 5 to go back to the previous menu \n");
+											System.out.println("*******************************************\n"
+													+"*        ==Customer Menu==                * \n" + "*          Welcome: Mike                  "   
+													+ "*\n*                                         *\n"
+													+ "*[press 1 to view your account(s)]        *\n"
+													+ "*[press 2 to withdraw from your account]  *\n"
+													+ "*[press 3 to deposit to your account]     *\n"
+													+ "*[press 4 transfer between your accounts] *\n"
+													+ "*[press 5 to go back to the previous menu]*\n"
+													+ "*******************************************\n");
 
 											try {
 
@@ -203,12 +205,17 @@ public class BankingApp {
 									case Employee:
 										boolean employeeLoggedIn = true;
 										while (employeeLoggedIn) {
-											System.out.println("==Employee Menu== \n\n" + "Welcome: "
-													+ loggedInUser.getUsername() + " You can do the following:"
-													+ "\n\n1=>[print an account by ID]           2=>[print a customer by ID]                  3=>[print a customer by username]  \n"
-													+ "4=>[print pending/inActive accounts]  5=>[print approved/active accounts]          6=>[deny account by ID] \n"
-													+ "7=>[approve account by ID]            8=>[print customer accounts by customer ID] \n"
-													+ "9=>[go back to the previous menu] \n");
+											System.out.println("***********************************************************************************************************************\n"
+													+ "*      ==Employee Menu==                                                                                 "
+													+ "             *\n" + "*      Welcome: Adam"
+													+ " You can do the following:                                                                        *"
+													+ "\n*                                                                                                                     *\n"
+													+ "*1=>[print account details by ID]      2=>[print customer info by ID]             3=>[print customer info by username]*\n"
+													+ "*4=>[print pending/inActive accounts]  5=>[print approved/active accounts]        6=>[deny accounts by ID]            *\n"
+													+ "*7=>[approve accounts by ID]           8=>[print user accounts list by user's ID]                                     *\n"
+													+ "*9=>[go back to the previous menu] "
+													+ "                                                                                   *\n"
+													+ "***********************************************************************************************************************\n");
 
 											try {
 
@@ -365,12 +372,17 @@ public class BankingApp {
 									case Admin:
 										boolean adminLoggedIn = true;
 										while (adminLoggedIn) {
-											System.out.println("==Admin Menu== \n\n" + "Welcome: "
-													+ loggedInUser.getUsername() + " You can do the following:"
-													+ "\n\n1=>[print all accounts details]             2=>[print all customers info]            3=>[approve accounts by ID]  \n"
-													+ "4=>[deny accounts by ID]                    5=>[update username by user's ID]        6=>[update password by user's ID] \n"
-													+ "7=>[update account balance by account's ID] 8=>[transfer money (any accounts by ID)] \n"
-													+ "9=>[remove user by ID]                      10=>[remove account by ID]               11=>[go back to the previous menu] \n");
+											System.out.println("************************************************************************************************************************\n"
+													+ "*      ==Admin Menu==                                                                        "
+													+ "                          *\n" + "*      Welcome: Oras"
+													+ " You can do the following:                                                                         *"
+													+ "\n*                                                                                                                      *"
+													+ "\n*1=>[print all accounts details]             2=>[print all customers info]            3=>[approve accounts by ID]      *\n"
+													+ "*4=>[deny accounts by ID]                    5=>[update username by user's ID]        6=>[update password by user's ID]*\n"
+													+ "*7=>[update account balance by account's ID] 8=>[transfer money (any accounts by ID)]                                  *\n"
+													+ "*9=>[remove user by ID]                      10=>[remove account by ID]                                                *\n"
+													+ "*11=>[print user accounts list by user's ID] 12=>[go back to the previous menu]                                        *\n"
+													+ "************************************************************************************************************************\n");
 
 											try {
 
@@ -400,6 +412,8 @@ public class BankingApp {
 
 												} 
 												else if (adminEntry == 11) {
+
+												} else if (adminEntry == 12) {
 													System.out.println("Thank you. See you again\n");
 													adminLoggedIn = false;
 												} else {
