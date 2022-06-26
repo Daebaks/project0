@@ -17,26 +17,33 @@ import revature.com.utility.ConnectionUtility;
 public class AccountDao implements AccountDaoInterface {
 
 	@Override
-	public int open(Account a, int userID) {
-//		Connection conn = ConnectionUtility.getConnection();
-//
-//		String sql = "INSERT INTO accounts  (users_a_id) VALUES (?) RETURNING accounts.id";
-//
-//		try {
-//			PreparedStatement st = conn.prepareStatement(sql);
-//			st.setInt(1, userID);
-//			ResultSet rs;
-//			if (!(rs = st.executeQuery()).equals(null)) {
-//				rs.next();
-//				int id = rs.getInt(1);
-//				return id;
-//			}
-//
-//		} catch (SQLException e) {
-//			System.out.println("Unable to create account! SQL - exception!");
-//			e.printStackTrace();
-//		}
-		return -1;
+	public void open(int userID) {
+		
+		int accountID=0;
+		Connection conn = ConnectionUtility.getConnection();
+		//First create a new row in accounts table, then take the new id to create a row in the junction table
+		String sql1 = "INSERT INTO accounts  (balance, users_a_id, active) VALUES (? ,? ,?) RETURNING accounts.id";
+		String sql2 = "INSERT INTO users_accounts_j  (users_j_id, accounts_j_id) VALUES (? ,? )";
+		try {
+			PreparedStatement st1 = conn.prepareStatement(sql1);
+			st1.setDouble(1, 0);
+			st1.setInt(2, userID);
+			st1.setBoolean(3, false);
+			ResultSet rs;
+			if (!(rs = st1.executeQuery()).equals(null)) {
+				rs.next();
+				accountID=rs.getInt(1);
+			}
+			//Now creating a new row for the junction table
+			PreparedStatement st2 = conn.prepareStatement(sql2);
+			st2.setInt(1, userID);
+			st2.setInt(2, accountID);
+			st2.executeQuery();
+			
+		} catch (SQLException e) {
+			System.out.println("Unable to create account! SQL - exception!");
+			e.printStackTrace();
+		}
 	}
 
 	@Override

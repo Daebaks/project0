@@ -87,7 +87,8 @@ public class BankingApp {
 													+ "*[press 2 to withdraw from your account]  *\n"
 													+ "*[press 3 to deposit to your account]     *\n"
 													+ "*[press 4 transfer between your accounts] *\n"
-													+ "*[press 5 to go back to the previous menu]*\n"
+													+ "*[press 5 to open a new account]          *\n"
+													+ "*[press 6 to go back to the previous menu]*\n"
 													+ "*******************************************\n");
 
 											try {
@@ -183,7 +184,12 @@ public class BankingApp {
 														scan.nextLine();
 													}
 
-												} else if (customerEntry == 5) {
+												} else if(customerEntry==5){
+													System.out.println("================================");
+													as.createNew(loggedInUser.getId()); //Open new account
+													System.out.println("================================");
+
+												}else if (customerEntry == 6) {
 													System.out.println("Thank you. See you again\n");
 													cutomerLoggedIn = false;
 												} else {

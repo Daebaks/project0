@@ -249,6 +249,10 @@ public class AccountService {
 		
 	}
 	
+	public void createNew(int userId) {
+		adao.open(userId);
+		System.out.println("New account created successfully!");
+	}
 	
 	
 }
