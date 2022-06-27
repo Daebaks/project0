@@ -7,7 +7,7 @@ import revature.com.models.Account;
 public interface AccountDaoInterface {
 
 	//Create a new account
-	void open(int userID);
+	int open(int userID);
 	
 	//Reading
 	List<Account> findAll();
