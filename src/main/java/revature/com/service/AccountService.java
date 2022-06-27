@@ -18,7 +18,6 @@ import revature.com.models.User;
 public class AccountService {
 
 	public AccountDaoInterface adao = new AccountDao();
-//	private UserDaoInterface udao = new UserDao();
 
 	// Log4j
 	Logger logger = Logger.getLogger(AccountService.class);
