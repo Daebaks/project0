@@ -24,9 +24,6 @@ public class BankingApp {
 	public static void main(String[] args) {
 
 		
-//		AccountService test = new AccountService();
-//		test.createNew(3);
-		
 		run();
 
 	}
