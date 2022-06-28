@@ -5,13 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import revature.com.models.Account;
-import revature.com.models.Role;
 import revature.com.utility.ConnectionUtility;
 
 public class AccountDao implements AccountDaoInterface {

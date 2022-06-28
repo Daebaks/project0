@@ -9,7 +9,6 @@ import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
 
-import revature.com.models.Account;
 import revature.com.models.Role;
 import revature.com.models.User;
 import revature.com.utility.ConnectionUtility;

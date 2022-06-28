@@ -3,8 +3,6 @@ package revature.com;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import revature.com.dao.AccountDao;
-import revature.com.dao.AccountDaoInterface;
 import revature.com.exceptions.AccountNotActiveException;
 import revature.com.exceptions.InsufficientBalanceException;
 import revature.com.exceptions.InvalidAmountOfMoneyException;
