@@ -70,7 +70,7 @@ public class UserService {
 
 	
 	public void viewAllUsers() {
-		
+		logger.info("Fetching users...");
 		if(!udao.findAll().isEmpty()) {
 			for(User u: udao.findAll()) {
 				System.out.println(u);
