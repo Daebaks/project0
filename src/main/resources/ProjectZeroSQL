@@ -42,7 +42,7 @@ INSERT INTO accounts (balance, users_a_id)
 		    
 SELECT * FROM accounts;
 
-ALTER TABLE accounts RENAME COLUMN users_a_id TO users_a_id;
+
 
 INSERT INTO users_accounts_j (users_j_id, accounts_j_id) 
 	VALUES (1, 1),
