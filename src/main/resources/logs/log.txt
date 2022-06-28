@@ -217,3 +217,11 @@
 2022-06-28 00:21:45 INFO  com.service.UserService:21 - New user registration
 2022-06-28 00:21:45 INFO  com.service.UserService:106 - User removal...
 2022-06-28 00:23:23 INFO  com.service.UserService:85 - User login...adam
+2022-06-28 00:50:06 INFO  com.service.UserService:85 - User login...mike
+2022-06-28 00:51:56 INFO  com.service.UserService:85 - User login...mike
+2022-06-28 00:52:57 INFO  com.service.UserService:85 - User login...mike
+2022-06-28 00:53:44 INFO  com.service.UserService:85 - User login...oraq
+2022-06-28 00:53:54 INFO  com.service.UserService:85 - User login...oras
+2022-06-28 00:53:58 INFO  com.service.AccountService:49 - Fetching accounts...
+2022-06-28 00:54:29 INFO  com.service.AccountService:81 - Account with id = 4was approved
+2022-06-28 00:54:34 INFO  com.service.AccountService:49 - Fetching accounts...
