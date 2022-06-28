@@ -174,3 +174,46 @@
 2022-06-27 19:45:26 INFO  com.service.AccountService:52 - Fetching accounts...
 2022-06-27 19:45:34 INFO  com.service.AccountService:52 - Fetching accounts...
 2022-06-27 19:45:34 INFO  com.service.AccountService:52 - Fetching accounts...
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:103 - Withdraw transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:91 - Account with id = 1was denied
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:81 - Account with id = 0was approved
+2022-06-28 00:21:45 INFO  com.service.AccountService:103 - Withdraw transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:103 - Withdraw transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:142 - Deposit transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:91 - Account with id = 0was denied
+2022-06-28 00:21:45 INFO  com.service.AccountService:142 - Deposit transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:103 - Withdraw transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:142 - Deposit transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:49 - Fetching accounts...
+2022-06-28 00:21:45 INFO  com.service.AccountService:142 - Deposit transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:103 - Withdraw transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:199 - Transfer transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:142 - Deposit transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:142 - Deposit transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:103 - Withdraw transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.AccountService:49 - Fetching accounts...
+2022-06-28 00:21:45 INFO  com.service.AccountService:249 - Account with id = 0 deleted
+2022-06-28 00:21:45 INFO  com.service.AccountService:249 - Account with id = 1 deleted
+2022-06-28 00:21:45 INFO  com.service.AccountService:81 - Account with id = 1was approved
+2022-06-28 00:21:45 INFO  com.service.AccountService:103 - Withdraw transaction by customer with id =2
+2022-06-28 00:21:45 INFO  com.service.UserService:118 - Username change 
+2022-06-28 00:21:45 INFO  com.service.UserService:85 - User login...Mike
+2022-06-28 00:21:45 INFO  com.service.UserService:21 - New user registration
+2022-06-28 00:21:45 INFO  com.service.UserService:85 - User login...hella
+2022-06-28 00:21:45 INFO  com.service.UserService:131 - Password change
+2022-06-28 00:21:45 INFO  com.service.UserService:118 - Username change 
+2022-06-28 00:21:45 INFO  com.service.UserService:21 - New user registration
+2022-06-28 00:21:45 INFO  com.service.UserService:85 - User login...Mike
+2022-06-28 00:21:45 INFO  com.service.UserService:21 - New user registration
+2022-06-28 00:21:45 INFO  com.service.UserService:21 - New user registration
+2022-06-28 00:21:45 INFO  com.service.UserService:106 - User removal...
+2022-06-28 00:23:23 INFO  com.service.UserService:85 - User login...adam

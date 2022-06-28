@@ -1,0 +1,55 @@
+CREATE TABLE accounts(
+	id serial PRIMARY KEY,
+	balance NUMERIC(50,2) DEFAULT 0, -- 50 total digits WITH up TO 2 being decimal 12345.67
+	users_a_id integer NOT NULL,
+	active bool DEFAULT FALSE -- mark whether the account IS active OR not
+);
+
+
+CREATE TYPE user_role AS ENUM ('Admin', 'Customer', 'Employee');
+
+
+CREATE TABLE users(
+	id serial PRIMARY KEY,
+	username varchar(50) NOT NULL UNIQUE,
+	pwd varchar(50) NOT NULL,
+	user_role user_role NOT null
+);
+
+--ALTER TABLE accounts ADD CONSTRAINT users_foreignkey FOREIGN KEY (users_a_id) REFERENCES users(id);
+
+CREATE TABLE users_accounts_j(
+	users_j_id integer NOT NULL REFERENCES users(id),
+	accounts_j_id int NOT NULL REFERENCES accounts(id)
+);
+
+INSERT INTO users (username, pwd, user_role) 
+	VALUES ('Adam', 'pass', 'Employee'),
+			('Steven', '1234', 'Customer'),
+			('Mike', 'pass', 'Customer'),
+		    ('Oras', 'pass', 'Admin');
+			
+SELECT * FROM users;
+
+ALTER TABLE accounts ADD CONSTRAINT users_foreignkey FOREIGN KEY (users_a_id) REFERENCES users(id);
+
+
+INSERT INTO accounts (balance, users_a_id)
+	VALUES (100, 1),
+		    (200, 2),
+		    (2000, 2),
+		    (300, 3);
+		    
+SELECT * FROM accounts;
+
+ALTER TABLE accounts RENAME COLUMN users_a_id TO users_a_id;
+
+INSERT INTO users_accounts_j (users_j_id, accounts_j_id) 
+	VALUES (1, 1),
+	 	   (2, 2), -- Marry's account (her id is 2)
+	 	   (2, 3), -- Marry's account (her id is 2)
+	 	   (3, 4);
+
+
+
+
