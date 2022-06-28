@@ -1,26 +1,24 @@
 package revature.com.service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import org.apache.log4j.Logger;
 
-import revature.com.dao.AccountDao;
-import revature.com.dao.AccountDaoInterface;
 import revature.com.dao.UserDao;
 import revature.com.dao.UserDaoInterface;
 import revature.com.exceptions.NewUserRegistrationFailedException;
 import revature.com.exceptions.UsernameAlreadyExistsException;
 import revature.com.exceptions.UsernameNotFoundException;
 import revature.com.exceptions.WrongPasswordException;
-import revature.com.models.Account;
 import revature.com.models.User;
 
 public class UserService {
 
 	public UserDaoInterface udao = new UserDao();
+	// Log4j
+		Logger logger = Logger.getLogger(UserService.class);
 
 	public User register(User u) {
 
+		logger.info("New user registration");
 		System.out.println("Registering the new user...\n");
 
 		// Validate username if it's taken before registering
@@ -84,6 +82,8 @@ public class UserService {
 	
 	public User login(String username, String password) {
 
+		logger.info("User login..."+username);
+		
 		User u = udao.findByUsername(username);
 
 		System.out.println("Loading...\n");
@@ -103,6 +103,7 @@ public class UserService {
 	}
 
 	public void removeUser(int id) {
+		logger.info("User removal...");
 		User u = udao.findById(id);
 		if (u.getUsername() == null) {
 			throw new UsernameNotFoundException("User doesn't exist");
@@ -114,6 +115,7 @@ public class UserService {
 	}
 	
 	public void changeUsername(int id, String newName) {
+		logger.info("Username change ");
 		User u = udao.findById(id);
 		if (u.getUsername() == null) {
 			throw new UsernameNotFoundException("User doesn't exist");
@@ -126,6 +128,7 @@ public class UserService {
 	}
 	
 	public void changePassword(int id, String newPass) {
+		logger.info("Password change");
 		User u = udao.findById(id);
 		if (u.getUsername() == null) {
 			throw new UsernameNotFoundException("User doesn't exist");
