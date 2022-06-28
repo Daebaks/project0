@@ -78,17 +78,17 @@ public class AccountService {
 	}
 	
 	public void approveAcById(int id) {
-		logger.info("Account with id = "+id+"was approved");
+		logger.info("Account activation/approval... id = "+id);
 		Account a = adao.findById(id);
 		if(a.getId()==0) {
 			throw new NoAccountsExistException("Account doesn't exist with this id");
 		}
 		adao.alterActivityById(id, true);
-		System.out.println("Account activated/approved");
+		System.out.println("Account approved/activated");
 	}
 
 	public void denyAcById(int id) {
-		logger.info("Account with id = "+id+"was denied");
+		logger.info("Account deactivation/denial... id = "+id);
 		Account a = adao.findById(id);
 		if(a.getId()==0) {
 			throw new NoAccountsExistException("Account doesn't exist with this id");
@@ -100,7 +100,7 @@ public class AccountService {
 	// Withdraws amount from account using account id
 	public double withdraw(double amount, int id, int custId) {
 		
-		logger.info("Withdraw transaction by customer with id ="+custId);
+		logger.info("Withdraw transaction... customer id ="+custId);
 
 		Account a = adao.findById(id);
 
@@ -139,7 +139,7 @@ public class AccountService {
 	// Deposit amount to account using id
 	public double deposit(double amount, int id, int custId) {
 
-		logger.info("Deposit transaction by customer with id ="+custId);
+		logger.info("Deposit transaction... customer id ="+custId);
 		Account a = adao.findById(id);
 
 		if(a.getId()==0) {
@@ -172,7 +172,7 @@ public class AccountService {
 	//Admins can transfer money from any 2 accounts regardless ownership and status of the accounts
 	public void transferAdmin(double amount, int accFrom, int accTo) {
 		
-		logger.info("Transfer transaction by admin");
+		logger.info("Transfer transaction -- admin...");
 		Account aFrom = adao.findById(accFrom);
 		Account aTo = adao.findById(accTo);
 		
@@ -196,7 +196,7 @@ public class AccountService {
 	
 	public void transfer(double amount, int accFrom, int accTo, int custId) {
 
-		logger.info("Transfer transaction by customer with id ="+custId);
+		logger.info("Transfer transaction... customer id ="+custId);
 		Account aFrom = adao.findById(accFrom);
 		Account aTo = adao.findById(accTo);
 
@@ -246,7 +246,7 @@ public class AccountService {
 	
 	
 	public void removeAcc(int id) {
-		logger.info("Account with id = "+id+" deleted");
+		logger.info("Account deletion... id = "+id);
 		Account a = adao.findById(id);
 		if(a.getId()==0) {
 			throw new NoAccountsExistException("Account doesn't exist with this id");
@@ -258,7 +258,7 @@ public class AccountService {
 	}
 	
 	public void createNew(int userId) {
-		logger.info("New account created by customer with id ="+userId);
+		logger.info("Account creation...");
 		int accID= adao.open(userId);
 		System.out.println("New account created successfully! account id = "+accID);
 	}

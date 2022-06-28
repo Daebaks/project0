@@ -18,7 +18,7 @@ public class UserService {
 
 	public User register(User u) {
 
-		logger.info("New user registration");
+		logger.info("New user registration...");
 		System.out.println("Registering the new user...\n");
 
 		// Validate username if it's taken before registering
@@ -115,7 +115,7 @@ public class UserService {
 	}
 	
 	public void changeUsername(int id, String newName) {
-		logger.info("Username change ");
+		logger.info("Username change...");
 		User u = udao.findById(id);
 		if (u.getUsername() == null) {
 			throw new UsernameNotFoundException("User doesn't exist");
@@ -128,7 +128,7 @@ public class UserService {
 	}
 	
 	public void changePassword(int id, String newPass) {
-		logger.info("Password change");
+		logger.info("Password change...");
 		User u = udao.findById(id);
 		if (u.getUsername() == null) {
 			throw new UsernameNotFoundException("User doesn't exist");
