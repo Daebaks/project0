@@ -47,14 +47,14 @@ public class BankingApp {
 				int mainEntry = scan.nextInt();
 
 				/*
-				 * Logging-in menu
+				 * Login Menu
 				 */
 				if (mainEntry == 2) {
 
-					// Logging-in for an existing user
+					// Login for an existing user
 					boolean loggedInRunning = true;
 					while (loggedInRunning) {
-						System.out.println("==Logging-in Menu== \n\n" + "Please press 1 to enter your credentials \n"
+						System.out.println("==Login Menu== \n\n" + "Please press 1 to enter your credentials \n"
 								+ "Please press 2 to go back to the main menu \n");
 
 						try {
@@ -62,7 +62,7 @@ public class BankingApp {
 							int loggedEntry = scan.nextInt();
 
 							if (loggedEntry == 1) {
-								// logging-in
+								// Login
 								try {
 									System.out.println("Enter username");
 									String username = scan.next();
@@ -82,7 +82,7 @@ public class BankingApp {
 										boolean cutomerLoggedIn = true;
 										while (cutomerLoggedIn) {
 											System.out.println("*******************************************\n"
-													+"*        ==Customer Menu==                * \n" + "*          Welcome: Mike                  "   
+													+"*        ==Customer Menu==                * \n" + "*          Welcome: "+loggedInUser.getUsername()+"                "   
 													+ "*\n*                                         *\n"
 													+ "*[press 1 to view your account(s)]        *\n"
 													+ "*[press 2 to withdraw from your account]  *\n"
